@@ -1,0 +1,33 @@
+﻿@page "/teachers"
+
+<h3>TeachersList</h3>
+
+<ul>
+    @foreach(Teacher t in teachers)
+    {
+        <li id="@t.TeacherId">@t.Name</li>
+    }
+</ul>
+
+@code {
+
+    public class Teacher
+    {
+        public int TeacherId { get; set; }
+        public string Name { get; set; }
+    }
+
+    public List<Teacher> teachers;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        teachers = new List<Teacher>()
+{
+            new Teacher { TeacherId = 1, Name = "Teacher1" },
+            new Teacher { TeacherId = 2, Name = "Teacher2"},
+            new Teacher {TeacherId = 3, Name = "Teacher3"}
+        };
+    }
+
+}
