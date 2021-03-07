@@ -20,70 +20,39 @@
 
 @if (showNewRoomUI)
 {
-    <div class="form-group">
-        @if (ErrorMessage != null && ErrorMessage.Length > 0)
-        {
-            <div class="alert alert-warning" role="alert">
-                @ErrorMessage
+    <EditForm Model="@newRoom" OnValidSubmit="AddNewRoom">
+        <div class="form-group">
+            @if (ErrorMessage != null && ErrorMessage.Length > 0)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @ErrorMessage
+                </div>
+            }
+
+            <div class="form-group row">
+                <label for="newName" class="col-sm-3">This one:</label>
+                <InputText id="newName" class="form-control col-sm-8" @bind-Value="@newRoom.Name" />
             </div>
-        }
 
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="Name" @bind-value="@NewRoomName" />
+            <div class="form-group row">
+                <label for="thisOne" class="col-sm-3">This one:</label>
+                <InputText id="thisOne" class="form-control col-sm-8" @bind-Value="@newRoom.Name" />
+            </div>
+
+            @*<div class="form-group">
+                    <input class="form-control" type="text" placeholder="Name" @bind-Value="@newRoom.Name" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" placeholder="Max Capacity" @bind-value="@newRoom.MaxCapacity" min="0" />
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" cols="30" placeholder="Description" @bind="@newRoom.Description" @bind:event="oninput" />
+                </div>*@
+
+            <div class="form-group">
+                <button class="btn btn-warning" type="button" @onclick="@AddNewRoom">Save</button>
+            </div>
+
         </div>
-        <div class="form-group">
-            <input class="form-control" type="number" placeholder="Max Capacity" @bind-value="@NewRoomMaxCap" min="0" />
-        </div>
-        <div class="form-group">
-            <textarea class="form-control" rows="3" cols="30" placeholder="Description" @bind="@NewRoomDescription" @bind:event="oninput" />
-        </div>
-
-        <div class="form-group">
-            <button class="btn btn-warning" type="button" @onclick="@AddNewRoom">Save</button>
-        </div>
-
-    </div>
-}
-
-@code {
-
-    public string NewRoomName { get; set; } = "First room";
-    public int NewRoomMaxCap { get; set; } = 10;
-    public string NewRoomDescription { get; set; } = "Awesome new room!";
-    public string ErrorMessage { get; set; } = string.Empty;
-    public bool NoErrors { get { return ErrorMessage == null || ErrorMessage.Length == 0; } }
-
-    bool showNewRoomUI = false;
-
-    List<Room> rooms;
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        rooms = new List<Room>();
-        rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
-        rooms.Add(new Room { Id = 1, Name = "Secon Room", MaxCapacity = 8 });
-    }
-
-    private void ToggleNewRoomInterface()
-    {
-        showNewRoomUI = !showNewRoomUI;
-    }
-
-    private void AddNewRoom()
-    {
-        bool roomExists = rooms.Where(x => x.Name.Equals(NewRoomName, StringComparison.OrdinalIgnoreCase)).Any();
-        if (roomExists)
-            ErrorMessage = "A room with this name already exists. Please choose another name.";
-        else
-        {
-            ErrorMessage = string.Empty;
-            int newId = rooms.Select(x => x.Id).Max();
-            rooms.Add(new Room { Id = newId + 1, Name = NewRoomName, Description = NewRoomDescription, MaxCapacity = NewRoomMaxCap });
-            NewRoomName = NewRoomDescription = ErrorMessage = string.Empty;
-            NewRoomMaxCap = 0;
-            showNewRoomUI = false;
-        }
-
-    }
+    </EditForm>
 }
