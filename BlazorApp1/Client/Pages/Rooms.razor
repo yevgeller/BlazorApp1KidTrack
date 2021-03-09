@@ -1,4 +1,5 @@
 ﻿@page "/rooms"
+@page "/rooms/{RoomNumber}"
 @using BlazorApp1.Shared.Models
 
 <h3>Rooms</h3>
@@ -20,7 +21,7 @@
 
 @if (showNewRoomUI)
 {
-    <EditForm Model="@newRoom" OnValidSubmit="AddNewRoom">
+    <EditForm Model="@newRoom" OnValidSubmit="AddNewRoom" OnInvalidSubmit="InvalidSubmit">
         <div class="form-group">
             @if (ErrorMessage != null && ErrorMessage.Length > 0)
             {
@@ -28,6 +29,8 @@
                     @ErrorMessage
                 </div>
             }
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
             <div class="form-group row">
                 <label for="newName" class="col-sm-3">This one:</label>
@@ -35,22 +38,17 @@
             </div>
 
             <div class="form-group row">
-                <label for="thisOne" class="col-sm-3">This one:</label>
-                <InputText id="thisOne" class="form-control col-sm-8" @bind-Value="@newRoom.Name" />
+                <label for="maxCapacity" class="col-sm-3">Maximum Capacity:</label>
+                <InputNumber id="maxCapacity" class="form-control col-sm-8" @bind-Value="@newRoom.MaxCapacity" />
             </div>
 
-            @*<div class="form-group">
-                    <input class="form-control" type="text" placeholder="Name" @bind-Value="@newRoom.Name" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="number" placeholder="Max Capacity" @bind-value="@newRoom.MaxCapacity" min="0" />
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" rows="3" cols="30" placeholder="Description" @bind="@newRoom.Description" @bind:event="oninput" />
-                </div>*@
+            <div class="form-group row">
+                <label for="description" class="col-sm-3">Description:</label>
+                <InputTextArea id="description" class="form-control col-sm-8" @bind-Value="@newRoom.Description" />
+            </div>
 
             <div class="form-group">
-                <button class="btn btn-warning" type="button" @onclick="@AddNewRoom">Save</button>
+                <button class="btn btn-warning" type="submit">Save</button>
             </div>
 
         </div>

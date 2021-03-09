@@ -1,4 +1,5 @@
 ﻿using BlazorApp1.Shared.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,14 @@ namespace BlazorApp1.Client.Pages
 {
     public partial class Rooms
     {
+        [Parameter]
+        public int RoomNumber { get; set; }
+        
         Room newRoom;
 
-        public string NewRoomName { get; set; } = "First room";
-        public int NewRoomMaxCap { get; set; } = 10;
-        public string NewRoomDescription { get; set; } = "Awesome new room!";
+        //public string NewRoomName { get; set; } = "First room";
+        //public int NewRoomMaxCap { get; set; } = 10;
+        //public string NewRoomDescription { get; set; } = "Awesome new room!";
         public string ErrorMessage { get; set; } = string.Empty;
         public bool NoErrors { get { return ErrorMessage == null || ErrorMessage.Length == 0; } }
 
@@ -36,18 +40,22 @@ namespace BlazorApp1.Client.Pages
 
         private void AddNewRoom()
         {
-            bool roomExists = rooms.Where(x => x.Name.Equals(NewRoomName, StringComparison.OrdinalIgnoreCase)).Any();
+            bool roomExists = rooms.Where(x => x.Name.Equals(newRoom.Name, StringComparison.OrdinalIgnoreCase)).Any();
             if (roomExists)
                 ErrorMessage = "A room with this name already exists. Please choose another name.";
             else
             {
                 ErrorMessage = string.Empty;
                 int newId = rooms.Select(x => x.Id).Max();
-                rooms.Add(new Room { Id = newId + 1, Name = NewRoomName, Description = NewRoomDescription, MaxCapacity = NewRoomMaxCap });
-                NewRoomName = NewRoomDescription = ErrorMessage = string.Empty;
-                NewRoomMaxCap = 0;
+                rooms.Add(newRoom);
+                newRoom = new Room();
                 showNewRoomUI = false;
             }
+
+        }
+
+        private void InvalidSubmit()
+        {
 
         }
     }
