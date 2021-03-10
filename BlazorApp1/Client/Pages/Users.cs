@@ -10,23 +10,23 @@ namespace BlazorApp1.Client.Pages
     {
         List<SystemUser> users;
 
-        public Users()
-        {
-            users = new List<SystemUser>();
-            users.Add(new SystemUser { Id = 1, IsAdmin = true, IsTeacher = true, Name = "AdminTeacher" });
-            users.Add(new SystemUser { Id = 2, IsAdmin = true, IsTeacher = false, Name = "JustAdmin" });
-            users.Add(new SystemUser { Id = 3, IsAdmin = false, IsTeacher = true, Name = "JustTeacher" });
-            users.Add(new SystemUser { Id = 4, IsAdmin = false, IsTeacher = false, Name = "Student" });
-
-        }
-
-        //protected override void OnInitialized()
+        //public Users()
         //{
         //    users = new List<SystemUser>();
         //    users.Add(new SystemUser { Id = 1, IsAdmin = true, IsTeacher = true, Name = "AdminTeacher" });
         //    users.Add(new SystemUser { Id = 2, IsAdmin = true, IsTeacher = false, Name = "JustAdmin" });
         //    users.Add(new SystemUser { Id = 3, IsAdmin = false, IsTeacher = true, Name = "JustTeacher" });
         //    users.Add(new SystemUser { Id = 4, IsAdmin = false, IsTeacher = false, Name = "Student" });
+
         //}
+
+        protected override void OnInitialized()
+        {
+            users = new List<SystemUser>();
+            users.Add(new SystemUser { Id = 1, IsAdmin = true, IsTeacher = true, Name = "AdminTeacher" });
+            users.Add(new SystemUser { Id = 2, IsAdmin = true, IsTeacher = false, Name = "JustAdmin" });
+            users.Add(new SystemUser { Id = 3, IsAdmin = false, IsTeacher = true, Name = "JustTeacher" });
+            users.Add(new SystemUser { Id = 4, IsAdmin = false, IsTeacher = false, Name = "Student" });
+        }
     }
 }
