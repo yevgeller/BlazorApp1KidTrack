@@ -14,7 +14,7 @@ namespace BlazorApp1.Shared.Models
         [StringLength(20, ErrorMessage = "Room name too long.")]
         public string Name { get; set; }
         [Required]
-        [Range(1, 20, ErrorMessage = "Max Capacity must be a number between 0 and 20")]
+        [Range(1, 20, ErrorMessage = "Max Capacity must be a number between 1 and 20")]
         public int MaxCapacity { get; set; }
         
         public string Description { get; set; }

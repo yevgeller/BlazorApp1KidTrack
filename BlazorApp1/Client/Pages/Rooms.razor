@@ -1,24 +1,40 @@
 ﻿@page "/rooms"
-@page "/rooms/{RoomNumber}"
+@page "/rooms/{RoomNumber:int}"
 @using BlazorApp1.Shared.Models
 
 <h3>Rooms</h3>
 
-<ul>
-    @foreach (Room r in rooms)
-    {
-        <li>
-            @r.Name
-            @if (r.Description != null)
-            {
-                <span>(@r.Description)</span>
-            }
-        </li>
-    }
-</ul>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Room Name</th>
+            <th scope="col">Max Capacity</th>
+            <th scope="col">Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Room r in rooms)
+        {
+            <tr>
+                <th scope="row">@r.Id</th>
+                <td>@r.Name</td>
+                <td>@r.MaxCapacity</td>
+                <td>@r.Description</td>
+                <td>
+                    <a href="@($"/rooms/{r.Id}")" class="btn btn-primary">
+                        <i class="oi oi-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
 <button type="button" @onclick="@ToggleNewRoomInterface" hidden="@showNewRoomUI">New Room</button>
-
+<br /> 
 @if (showNewRoomUI)
 {
     <EditForm Model="@newRoom" OnValidSubmit="AddNewRoom" OnInvalidSubmit="InvalidSubmit">
