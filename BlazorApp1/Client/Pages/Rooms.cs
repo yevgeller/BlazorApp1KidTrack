@@ -50,9 +50,6 @@ namespace BlazorApp1.Client.Pages
             roomsDAL = new RoomsDAL();
             newRoom = new Room();
             rooms = roomsDAL.GetRooms();
-            //rooms = new List<Room>();
-            //rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
-            //rooms.Add(new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 });
         }
 
         private void ToggleNewRoomInterface()
@@ -62,22 +59,26 @@ namespace BlazorApp1.Client.Pages
 
         private void AddNewRoom()
         {
-            if (RoomNumber > 0) //update
+            if (rooms.Where(x => x.Name.Equals(newRoom.Name, StringComparison.OrdinalIgnoreCase)).Any())
             {
-
-                Room toBeUpdated = rooms.Where(x => x.Id == RoomNumber).FirstOrDefault();
-                toBeUpdated.Name = newRoom.Name;
-                toBeUpdated.MaxCapacity = newRoom.MaxCapacity;
-                toBeUpdated.Description = newRoom.Description;
-                newRoom = new Room();
-                showNewRoomUI = false;
-                NavigationManager.NavigateTo("/rooms/");
+                ErrorMessage = "A room with this name already exists. Please choose another name.";
             }
             else
             {
-                if (rooms.Where(x => x.Name.Equals(newRoom.Name, StringComparison.OrdinalIgnoreCase)).Any())
+                if (RoomNumber > 0) //update
                 {
-                    ErrorMessage = "A room with this name already exists. Please choose another name.";
+                    Room toBeUpdated = new Room
+                    {
+                        Id = RoomNumber,
+                        Name = newRoom.Name,
+                        MaxCapacity = newRoom.MaxCapacity,
+                        Description = newRoom.Description
+                    };
+                    roomsDAL.EditRoom(toBeUpdated);
+
+                    newRoom = new Room();
+                    showNewRoomUI = false;
+                    NavigationManager.NavigateTo("/rooms/");
                 }
                 else
                 {
@@ -89,12 +90,17 @@ namespace BlazorApp1.Client.Pages
                     rooms = roomsDAL.GetRooms();
                 }
             }
-
         }
 
         private void InvalidSubmit()
         {
 
+        }
+
+        private void Cancel()
+        {
+            newRoom = new Room();
+            showNewRoomUI = false;
         }
     }
 }
