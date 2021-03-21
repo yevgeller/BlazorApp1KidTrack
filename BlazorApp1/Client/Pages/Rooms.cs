@@ -1,4 +1,5 @@
-﻿using BlazorApp1.Shared.Models;
+﻿using BlazorApp1.FakeDAL2;
+using BlazorApp1.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace BlazorApp1.Client.Pages
         NavigationManager NavigationManager { get; set; }
 
         Room newRoom;
+        RoomsDAL roomsDAL;
 
         public string ErrorMessage { get; set; } = string.Empty;
         public bool NoErrors { get { return ErrorMessage == null || ErrorMessage.Length == 0; } }
@@ -45,10 +47,12 @@ namespace BlazorApp1.Client.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            roomsDAL = new RoomsDAL();
             newRoom = new Room();
-            rooms = new List<Room>();
-            rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
-            rooms.Add(new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 });
+            rooms = roomsDAL.GetRooms();
+            //rooms = new List<Room>();
+            //rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
+            //rooms.Add(new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 });
         }
 
         private void ToggleNewRoomInterface()
@@ -78,10 +82,11 @@ namespace BlazorApp1.Client.Pages
                 else
                 {
                     ErrorMessage = string.Empty;
-                    int newId = rooms.Select(x => x.Id).Max();
-                    rooms.Add(new Room { Id = newId + 1, Name = newRoom.Name, MaxCapacity = newRoom.MaxCapacity, Description = newRoom.Description });
+                    Room r = new Room { Id = 0, Name = newRoom.Name, MaxCapacity = newRoom.MaxCapacity, Description = newRoom.Description };
+                    roomsDAL.AddRoom(r);
                     newRoom = new Room();
                     showNewRoomUI = false;
+                    rooms = roomsDAL.GetRooms();
                 }
             }
 
