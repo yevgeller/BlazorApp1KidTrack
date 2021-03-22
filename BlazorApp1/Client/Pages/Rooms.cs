@@ -99,6 +99,8 @@ namespace BlazorApp1.Client.Pages
 
         private void Cancel()
         {
+            NavigationManager.NavigateTo("/rooms/");
+            ErrorMessage = string.Empty;
             newRoom = new Room();
             showNewRoomUI = false;
         }
