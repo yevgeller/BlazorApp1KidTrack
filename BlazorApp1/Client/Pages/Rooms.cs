@@ -74,10 +74,8 @@ namespace BlazorApp1.Client.Pages
                         MaxCapacity = newRoom.MaxCapacity,
                         Description = newRoom.Description
                     };
+                    
                     roomsDAL.EditRoom(toBeUpdated);
-
-                    newRoom = new Room();
-                    showNewRoomUI = false;
                     NavigationManager.NavigateTo("/rooms/");
                 }
                 else
@@ -85,17 +83,15 @@ namespace BlazorApp1.Client.Pages
                     ErrorMessage = string.Empty;
                     Room r = new Room { Id = 0, Name = newRoom.Name, MaxCapacity = newRoom.MaxCapacity, Description = newRoom.Description };
                     roomsDAL.AddRoom(r);
-                    newRoom = new Room();
-                    showNewRoomUI = false;
                     rooms = roomsDAL.GetRooms();
                 }
+
+                newRoom = new Room();
+                showNewRoomUI = false;
             }
         }
 
-        private void InvalidSubmit()
-        {
-
-        }
+        private void InvalidSubmit() { }
 
         private void Cancel()
         {

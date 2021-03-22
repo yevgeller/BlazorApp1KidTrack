@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BlazorApp1.Shared.Models
 {
-    [DebuggerDisplay("{ForDisplay}")]
+    [DebuggerDisplay("${ForDisplay}")]
     public class Room
     {
         public int Id { get; set; }

@@ -1,4 +1,5 @@
 ﻿@page "/users"
+@page "/users/{UserId:int}"
 @using BlazorApp1.Shared.Models
 
 <h3>Users</h3>
@@ -10,6 +11,8 @@
             <th scope="col">Admin?</th>
             <th scope="col">Teacher?</th>
             <th scope="col">Name</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +23,56 @@
                 <td>@StaticUtils.BoolToStringYesNo(u.IsAdmin)</td>
                 <td>@StaticUtils.BoolToStringYesNo(u.IsTeacher)</td>
                 <td>@u.Name</td>
+                <td>
+                    <a href="@($"/users/{u.Id}")" class="btn btn-primary">
+                        <i class="oi oi-pencil"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="" class="btn btn-primary">
+                        <i class="oi oi-delete"></i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+<br />
+<button type="button" @onclick="@ToggleNewUI" hidden="@showNewUI">New User</button>
+<br />
+@if (showNewUI)
+{
+    <EditForm Model="@newUser" OnValidSubmit="AddNewUser" OnInvalidSubmit="InvalidSubmit">
+        <div class="form-group">
+            @if (ErrorMessage != null && ErrorMessage.Length > 0)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @ErrorMessage
+                </div>
+            }
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group row">
+                <label for="newName" class="col-sm-3">Name</label>
+                <InputText id="newName" class="form-control col-sm-8" @bind-Value="@newUser.Name" />
+            </div>
+
+            <div class="form-group row">
+                <label for="isAdmin" class="col-sm-3">Is Admin?</label>
+                <InputCheckbox id="isAdmin" class="form-control col-sm-8" @bind-Value="@newUser.IsAdmin" />
+            </div>
+
+            <div class="form-group row">
+                <label for="isTeacher" class="col-sm-3">Is Teacher?</label>
+                <InputCheckbox id="isTeacher" class="form-control col-sm-8" @bind-Value="@newUser.IsTeacher" />
+            </div>
+
+            <div class="form-group row">
+                <button class="btn btn-warning" type="submit">Save</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-warning" @onclick="Cancel" type="button">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
