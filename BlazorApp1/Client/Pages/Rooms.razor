@@ -20,7 +20,11 @@
         {
             <tr>
                 <th scope="row">@r.Id</th>
-                <td>@r.Name</td>
+                <td>
+                    <a href="@($"/roomDetails/{r.Id}")">
+                        @r.Name
+                    </a>
+                </td>
                 <td>@r.MaxCapacity</td>
                 <td>@r.Description</td>
                 <td>
@@ -34,7 +38,7 @@
 </table>
 <br />
 <button type="button" @onclick="@ToggleNewRoomInterface" hidden="@showNewRoomUI">New Room</button>
-<br /> 
+<br />
 @if (showNewRoomUI)
 {
     <EditForm Model="@newRoom" OnValidSubmit="AddNewRoom" OnInvalidSubmit="InvalidSubmit">

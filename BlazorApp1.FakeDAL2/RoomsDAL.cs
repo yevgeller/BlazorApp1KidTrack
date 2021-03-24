@@ -22,6 +22,11 @@ namespace BlazorApp1.FakeDAL2
             return rooms;
         }
 
+        public Room GetRoom(int roomId)
+        {
+            return rooms.Where(x => x.Id == roomId).FirstOrDefault();
+        }
+
         public int AddRoom(Room room)
         {
             if(room.Id == 0)
