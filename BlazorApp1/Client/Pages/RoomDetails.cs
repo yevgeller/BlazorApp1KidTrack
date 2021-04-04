@@ -18,7 +18,8 @@ namespace BlazorApp1.Client.Pages
 
         Room thisRoom;
         RoomsDAL roomsDAL;
-
+        //Teachers here
+        //Participants here
         protected override void OnParametersSet()
         {
             if (RoomId < 1)
