@@ -12,7 +12,7 @@ namespace BlazorApp1.FakeDAL2
 
         public ParticipantDAL()
         {
-
+            //TODO: Dummy list of participants here
         }
 
         public List<Participant> GetParticipantsPerRoom(Room r)
