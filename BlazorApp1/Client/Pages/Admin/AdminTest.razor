@@ -1,0 +1,16 @@
+﻿<h3>AdminTest</h3>
+
+<div>
+    @message
+</div>
+
+
+@code { 
+
+    string message;
+    protected override void OnInitialized()
+    {
+        message = "Hello from Admin subpage";
+        base.OnInitialized();
+    }
+}
