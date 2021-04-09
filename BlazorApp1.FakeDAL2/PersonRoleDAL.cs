@@ -19,6 +19,11 @@ namespace BlazorApp1.FakeDAL2
             return personRoles.Where(x => x.Person.Id == person.Id).ToList();
         }
 
+        public List<PersonRole> GetPersonRoles()
+        {
+            return personRoles;
+        }
+
         public List<PersonRole> GetPersonRoles(int personId)
         {
             return personRoles.Where(x => x.Person.Id == personId).ToList();
