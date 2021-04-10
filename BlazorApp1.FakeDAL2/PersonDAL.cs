@@ -22,6 +22,9 @@ namespace BlazorApp1.FakeDAL2
             Person p08 = new Person { Id = 8, Name = "8Student2" };
             Person p09 = new Person { Id = 9, Name = "9Student3" };
             Person p10 = new Person { Id = 10, Name = "10Student4" };
+            Person p11 = new Person { Id = 11, Name = "11Parent" };
+            Person p12 = new Person { Id = 12, Name = "12Parent" };
+
 
             persons.Add(p01);
             persons.Add(p02);
@@ -33,6 +36,8 @@ namespace BlazorApp1.FakeDAL2
             persons.Add(p08);
             persons.Add(p09);
             persons.Add(p10);
+            persons.Add(p11);
+            persons.Add(p12);
         }
 
         public int AddPerson(Person pNew)
