@@ -63,7 +63,7 @@ namespace BlazorApp1.Client.Pages
                 };
 
                 personsDAL.EditPerson(toBeUpdated);
-                nm.NavigateTo("/users/");
+                nm.NavigateTo("/persons/");
             }
             else
             {

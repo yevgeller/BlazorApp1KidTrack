@@ -40,24 +40,27 @@ namespace BlazorApp1.FakeDAL2
             persons.Add(p12);
         }
 
+        private int GetNextIdentityValue()
+        {
+            int next = persons.Select(x => x.Id).Max() + 1;
+            return next;
+        }
+
         public int AddPerson(Person pNew)
         {
-            int newId = pNew.Id;
-
             if(pNew.Id == 0)
             {
-                newId = persons.Select(x => x.Id).Max();
-                pNew.Id = newId + 1;
+                pNew.Id = GetNextIdentityValue();
             }
 
-            if(persons.Where(x=>x.Id == newId).Any())
+            if(persons.Where(x=>x.Id == pNew.Id).Any())
             {
-                throw new Exception($"Person with an id of {newId} already exists");
+                throw new Exception($"Person with an id of {pNew.Id} already exists");
             }
 
             persons.Add(pNew);
 
-            return newId;
+            return pNew.Id;
         }
 
         public List<Person> GetPeople()

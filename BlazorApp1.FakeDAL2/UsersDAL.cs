@@ -6,6 +6,7 @@ using System.Text;
 
 namespace BlazorApp1.FakeDAL2
 {
+    [Obsolete]
     public class UsersDAL
     {
         List<SystemUser> users;
