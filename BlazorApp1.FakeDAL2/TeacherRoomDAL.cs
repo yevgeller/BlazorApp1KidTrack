@@ -12,33 +12,23 @@ namespace BlazorApp1.FakeDAL2
 
         public TeacherRoomDAL()
         {
-            //List<SystemUser> users = new List<SystemUser>();
-            SystemUser su1 = new SystemUser { Id = 1, IsAdmin = true, IsTeacher = true, Name = "AdminTeacher" };
-            SystemUser su3 = new SystemUser { Id = 3, IsAdmin = false, IsTeacher = true, Name = "JustTeacher" };
-            SystemUser su5 = new SystemUser { Id = 5, IsAdmin = false, IsTeacher = true, Name = "Teacher5" };
-            SystemUser su6 = new SystemUser { Id = 6, IsAdmin = false, IsTeacher = true, Name = "Teacher6" };
-            
-            //users.Add();
-            //users.Add();
-            //users.Add();
-            //users.Add();
+            Person p01 = new Person { Id = 1, Name = "1AdminTeacher" };
+            Person p03 = new Person { Id = 3, Name = "3JustTeacher1" };
+            Person p04 = new Person { Id = 4, Name = "4JustTeacher2" };
+            Person p05 = new Person { Id = 5, Name = "5JustTeacher3" };
+            Person p06 = new Person { Id = 6, Name = "6JustTeacher4" };
 
-
-
-            //List<Room> rooms = new List<Room>();
             Room r1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
             Room r2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
-            //rooms.Add(r1);
-            //rooms.Add(r2);
 
-            TeacherRoomAssignments.Add(new TeacherRoom { Room = r1, Teacher = su1 });
-            TeacherRoomAssignments.Add(new TeacherRoom { Room = r1, Teacher = su5 });
-            TeacherRoomAssignments.Add(new TeacherRoom { Room = r2, Teacher = su3 });
-            TeacherRoomAssignments.Add(new TeacherRoom { Room = r2, Teacher = su6 });
-
+            TeacherRoomAssignments.Add(new TeacherRoom { Room = r1, Teacher = p01 });
+            TeacherRoomAssignments.Add(new TeacherRoom { Room = r1, Teacher = p03 });
+            TeacherRoomAssignments.Add(new TeacherRoom { Room = r2, Teacher = p04 });
+            TeacherRoomAssignments.Add(new TeacherRoom { Room = r2, Teacher = p05 });
+            TeacherRoomAssignments.Add(new TeacherRoom { Room = r2, Teacher = p06 });
         }
 
-        public int AssignTeacherToARoom(int teacherId, int roomId)
+        public int AssignTeacherToARoom(Person teacher, Room room)
         {
             //get room, get teacher, add new pairing, check if exists already
             throw new NotImplementedException();
