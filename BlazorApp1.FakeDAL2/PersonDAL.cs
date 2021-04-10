@@ -74,5 +74,17 @@ namespace BlazorApp1.FakeDAL2
         {
             return persons.Where(x => x.Id == id).FirstOrDefault();
         }
+
+        public void EditPerson(Person newData)
+        {
+            Person p = persons.Where(x => x.Id == newData.Id).FirstOrDefault();
+            if(p== null)
+            {
+                throw new Exception($"No user with Id of {newData.Id}");
+            }
+
+            p.Name = newData.Name;
+            p.BirthDate = newData.BirthDate;
+        }
     }
 }

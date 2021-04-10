@@ -10,31 +10,29 @@ namespace BlazorApp1.Client.Pages
 {
     public partial class Users
     {
-        List<SystemUser> users;
+        List<Person> personnel;
 
         [Parameter]
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         [Inject]
         NavigationManager nm { get; set; }
 
-        SystemUser newUser;
-        UsersDAL usersDAL;
+        Person newUser;
+        PersonDAL personsDAL;
         public string ErrorMessage { get; set; } = string.Empty;
         public bool showNewUI = false;
 
         protected override void OnParametersSet()
         {
-            UserId = UserId;
-            if (UserId > 0)
+            Id = Id;
+            if (Id > 0)
             {
-                SystemUser u = users.Where(x => x.Id == UserId).FirstOrDefault();
-                if (u != null)
+                Person p = personnel.Where(x => x.Id == Id).FirstOrDefault();
+                if (p != null)
                 {
-                    newUser.Id = u.Id;
-                    newUser.Name = u.Name;
-                    newUser.IsAdmin = u.IsAdmin;
-                    newUser.IsTeacher = u.IsTeacher;
+                    newUser.Id = p.Id;
+                    newUser.Name = p.Name;
                     showNewUI = true;
                 }
             }
@@ -44,14 +42,9 @@ namespace BlazorApp1.Client.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            usersDAL = new UsersDAL();
-            newUser = new SystemUser();
-            users = usersDAL.GetUsers();
-            //users = new List<SystemUser>();
-            //users.Add(new SystemUser { Id = 1, IsAdmin = true, IsTeacher = true, Name = "AdminTeacher" });
-            //users.Add(new SystemUser { Id = 2, IsAdmin = true, IsTeacher = false, Name = "JustAdmin" });
-            //users.Add(new SystemUser { Id = 3, IsAdmin = false, IsTeacher = true, Name = "JustTeacher" });
-            //users.Add(new SystemUser { Id = 4, IsAdmin = false, IsTeacher = false, Name = "Student" });
+            personsDAL = new PersonDAL();
+            newUser = new Person();
+            personnel = personsDAL.GetPeople();
         }
 
         private void ToggleNewUI()
@@ -61,37 +54,35 @@ namespace BlazorApp1.Client.Pages
 
         private void AddNewUser()
         {
-            if (UserId > 0) //update an existing user
+            if (Id > 0) //update an existing user
             {
-                SystemUser toBeUpdated = new SystemUser
+                Person toBeUpdated = new Person
                 {
-                    Id = UserId,
-                    Name = newUser.Name,
-                    IsAdmin = newUser.IsAdmin,
-                    IsTeacher = newUser.IsTeacher
+                    Id = Id,
+                    Name = newUser.Name
                 };
 
-                usersDAL.EditUser(toBeUpdated);
+                personsDAL.EditPerson(toBeUpdated);
                 nm.NavigateTo("/users/");
             }
             else
             {
                 ErrorMessage = string.Empty;
-                SystemUser su = new SystemUser { Id = 0, Name = newUser.Name, IsAdmin = newUser.IsAdmin, IsTeacher = newUser.IsTeacher };
-                usersDAL.AddUser(su);
+                Person p = new Person { Id = 0, Name = newUser.Name };
+                personsDAL.AddPerson(p);
             }
 
             showNewUI = false;
-            newUser = new SystemUser();
+            newUser = new Person();
         }
 
         private void InvalidSubmit() { }
 
         private void Cancel()
         {
-            nm.NavigateTo("/users/");
+            nm.NavigateTo("/personnel/");
             ErrorMessage = string.Empty;
-            newUser = new SystemUser();
+            newUser = new Person();
             showNewUI = false;
         }
     }
