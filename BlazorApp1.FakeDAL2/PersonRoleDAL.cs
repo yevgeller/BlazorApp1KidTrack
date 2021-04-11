@@ -60,9 +60,13 @@ namespace BlazorApp1.FakeDAL2
             personRoles.Add(p12parent);
         }
 
-        public List<PersonRole> GetPersonRoles(Person person)
+        public List<Role> GetPersonRoles(Person person)
         {
-            return personRoles.Where(x => x.Person.Id == person.Id).ToList();
+            List<PersonRole> pr = personRoles.Where(x => x.Person.Id == person.Id).ToList();
+
+            List<Role> roles = pr.Select(x => x.Role).ToList<Role>();
+
+            return roles;
         }
 
         public List<PersonRole> GetPersonRoles()

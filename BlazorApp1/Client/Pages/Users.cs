@@ -18,7 +18,7 @@ namespace BlazorApp1.Client.Pages
         [Inject]
         NavigationManager nm { get; set; }
 
-        PersonWithRoleString newUser;
+        PersonWithRoles newUser;
         PersonDAL personsDAL;
         public string ErrorMessage { get; set; } = string.Empty;
         public bool showNewUI = false;
@@ -28,13 +28,13 @@ namespace BlazorApp1.Client.Pages
             Id = Id;
             if (Id > 0)
             {
-                PersonWithRoleString p = personsDAL.GetPersonWithRolesStringForEdit(Id);
+                PersonWithRoles p = personsDAL.GetPersonWithRolesForEdit(Id);
                 if (p != null)
                 {
                     newUser.Id = p.Id;
                     newUser.Name = p.Name;
                     newUser.Login = p.Login;
-                    newUser.RoleString = p.RoleString;
+                    newUser.Roles = p.Roles;
                     showNewUI = true;
                 }
             }
@@ -45,7 +45,7 @@ namespace BlazorApp1.Client.Pages
         {
             base.OnInitialized();
             personsDAL = new PersonDAL();
-            newUser = new PersonWithRoleString();
+            newUser = new PersonWithRoles();
             personnel = personsDAL.GetPeople();
         }
 
@@ -75,7 +75,7 @@ namespace BlazorApp1.Client.Pages
             }
 
             showNewUI = false;
-            newUser = new PersonWithRoleString();
+            newUser = new PersonWithRoles();
         }
 
         private void InvalidSubmit() { }
@@ -84,7 +84,7 @@ namespace BlazorApp1.Client.Pages
         {
             nm.NavigateTo("/personnel/");
             ErrorMessage = string.Empty;
-            newUser = new PersonWithRoleString();
+            newUser = new PersonWithRoles();
             showNewUI = false;
         }
     }

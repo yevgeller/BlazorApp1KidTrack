@@ -51,22 +51,17 @@ namespace BlazorApp1.FakeDAL2
             }
         }
 
-
-
-        public PersonWithRoleString GetPersonWithRolesStringForEdit(int id)
+        public PersonWithRoles GetPersonWithRolesForEdit(int id)
         {
             Person p = persons.Where(x => x.Id == id).FirstOrDefault();
             if (p == null)
             {
                 throw new Exception($"No person with Id of {id}");
             }
+            List<Role> pr = LocalPersonRoleDAL.GetPersonRoles(new Person { Id = id });
 
-            PersonWithRoleString pwrs = new PersonWithRoleString { Id = p.Id, Name = p.Name, Login = p.Login };
-            List<PersonRole> pr = LocalPersonRoleDAL.GetPersonRoles(new Person { Id = id });
-            string roleString = String.Join(", ", pr.Select(x => x.Role.Name));
-
-            pwrs.RoleString = roleString;
-
+            PersonWithRoles pwrs = new PersonWithRoles { Id = p.Id, Name = p.Name, Login = p.Login, Roles = pr };
+            
             return pwrs;
         }
 
