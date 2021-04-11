@@ -10,9 +10,12 @@ namespace BlazorApp1.Shared.Models
         public List<Role> Roles { get; set; }
         public string RoleString()
         {
-            var r = this.Roles;
-            var a = String.Join(", ", this.Roles.Select(x => x.Name));
-            return a;
+            if (this.Roles == null)
+                return "No roles specified";
+            if (!Roles.Any())
+                return "No roles";
+            
+            return String.Join(", ", this.Roles.Select(x => x.Name));
         }
     }
 }
