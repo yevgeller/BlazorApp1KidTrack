@@ -16,6 +16,8 @@ namespace BlazorApp1.Shared.Models
         [Required]
         public DateTime BirthDate { get; set; }
 
+        public string Login { get; set; }
+
         public string ForDisplay()
         {
             return $"{Id}-{Name}";

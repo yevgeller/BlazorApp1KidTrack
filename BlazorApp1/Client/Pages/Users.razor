@@ -34,6 +34,13 @@
             </div>
 
             <div class="form-group row">
+                <label for="newLogin" class="col-sm-3">Login</label>
+                <InputText id="newLogin" class="form-control col-sm-8" @bind-Value="@newUser.Login" />
+            </div>
+
+            <label>@newUser.RoleString</label>
+
+            <div class="form-group row">
                 <button class="btn btn-warning" type="submit">Save</button>
                 &nbsp;&nbsp;
                 <button class="btn btn-warning" @onclick="Cancel" type="button">Cancel</button>
