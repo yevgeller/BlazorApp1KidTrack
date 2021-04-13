@@ -15,7 +15,12 @@ namespace BlazorApp1.Shared.Models
             if (!Roles.Any())
                 return "No roles";
             
-            return String.Join(", ", this.Roles.Select(x => x.Name));
+            return String.Join(", ", this.Roles.Select(x => $"{x.Id}, {x.Name}"));
+        }
+
+        public override string ForDisplay()
+        {
+            return $"{base.ForDisplay()}-{RoleString()}";
         }
     }
 }

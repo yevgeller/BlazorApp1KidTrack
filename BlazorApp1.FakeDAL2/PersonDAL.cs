@@ -103,7 +103,7 @@ namespace BlazorApp1.FakeDAL2
             return persons.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public void EditPerson(Person newData)
+        public void EditPerson(PersonWithRoles newData)
         {
             Person p = persons.Where(x => x.Id == newData.Id).FirstOrDefault();
             if (p == null)
@@ -113,6 +113,9 @@ namespace BlazorApp1.FakeDAL2
 
             p.Name = newData.Name;
             p.BirthDate = newData.BirthDate;
+            p.Login = newData.Login;
+
+            LocalPersonRoleDAL.ChangePersonRoles(p, newData.Roles);
         }
     }
 }

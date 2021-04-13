@@ -27,6 +27,9 @@
             }
             <DataAnnotationsValidator />
             <ValidationSummary />
+            <div class="form-group row">
+                @newUser.ForDisplay()
+            </div>
 
             <div class="form-group row">
                 <label for="newName" class="col-sm-3">Name</label>
@@ -38,7 +41,17 @@
                 <InputText id="newLogin" class="form-control col-sm-8" @bind-Value="@newUser.Login" />
             </div>
 
-            <label>@newUser.RoleString()</label>
+            <div class="form-group-row">
+                @foreach (Role r in allRoles)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="@r.Name" id='@($"role{r.Id}")'
+                               checked="@SelectedUserHasRole(r.Id)"
+                               @onchange="eventArgs => { ToggleRole((bool)eventArgs.Value, r.Name); }" />
+                        <label class="form-check-label" for='@($"role{r.Id}")'>@r.Name</label><br />
+                    </div>
+                }
+            </div>
 
             <div class="form-group row">
                 <button class="btn btn-warning" type="submit">Save</button>

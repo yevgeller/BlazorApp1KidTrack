@@ -18,9 +18,9 @@ namespace BlazorApp1.Shared.Models
 
         public string Login { get; set; }
 
-        public string ForDisplay()
+        public virtual string ForDisplay()
         {
-            return $"{Id}-{Name}";
+            return $"{Id}-{Name}-{Login}";
         }
     }
 }

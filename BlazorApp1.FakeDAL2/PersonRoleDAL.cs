@@ -79,6 +79,33 @@ namespace BlazorApp1.FakeDAL2
             return personRoles.Where(x => x.Person.Id == personId).ToList();
         }
 
+        public bool PersonHasRole(Person p, Role r)
+        {
+            return personRoles.Any(x => x.Person.Id == p.Id && x.Role.Id == r.Id);
+        }
+
+        public void ChangePersonRoles(Person person, List<Role> freshRoles)
+        {
+
+            List<PersonRole> thisPersonsRoles = this.GetPersonRoles(person.Id);
+            foreach(PersonRole pr in thisPersonsRoles)
+            {
+                if(!freshRoles.Any(x=>x.Id == pr.Role.Id))
+                {
+                    this.RemovePersonRole(person, pr.Role);
+                }
+            }
+
+            foreach(Role r in freshRoles)
+            {
+                if(!this.PersonHasRole(person, r))
+                {
+                    this.AddRoleToPerson(person, r);
+                }
+            }
+
+        }
+
         public void AddRoleToPerson(Person person, Role role)
         {
             if(personRoles.Where(x=>x.Person.Id == person.Id && x.Role.Id == role.Id).Any())
