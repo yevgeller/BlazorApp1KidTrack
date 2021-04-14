@@ -11,6 +11,7 @@ namespace BlazorApp1.Client.Pages
     public partial class Users
     {
         List<Person> personnel;
+        List<PersonWithRoles> personsWithRoles;
 
         [Parameter]
         public int Id { get; set; }
@@ -21,6 +22,7 @@ namespace BlazorApp1.Client.Pages
         PersonWithRoles newUser;
         PersonDAL personsDAL;
         RoleDAL roleDAL;
+        PersonRoleDAL personRoleDAL;
         public string ErrorMessage { get; set; } = string.Empty;
         public bool showNewUI = false;
 
@@ -52,6 +54,8 @@ namespace BlazorApp1.Client.Pages
             personnel = personsDAL.GetPeople();
             roleDAL = new RoleDAL();
             allRoles = roleDAL.GetAllRoles();
+            personRoleDAL = new PersonRoleDAL();
+            personsWithRoles = personRoleDAL.GetAllPersonsWithRoles();
         }
 
         private void ToggleNewUI()

@@ -22,5 +22,21 @@ namespace BlazorApp1.Shared.Models
         {
             return $"{Id}-{Name}-{Login}";
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null) return false;
+            Person p = obj as Person;
+
+            if (p == null) return false;
+
+            return Id == p.Id && Name == p.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
     }
 }

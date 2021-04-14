@@ -26,24 +26,24 @@ namespace BlazorApp1.FakeDAL2
             Person p11 = new Person { Id = 11, Name = "11Parent" };
             Person p12 = new Person { Id = 12, Name = "12Parent" };
 
-            Role admin = new Role { Id = 100, Name = "Admin" };
-            Role teacher = new Role { Id = 101, Name = "Teacher" };
-            Role parent = new Role { Id = 102, Name = "Parent" };
-            Role student = new Role { Id = 103, Name = "Student" }; //may not be needed
+            //Role admin = new Role { Id = 100, Name = "Admin" };
+            //Role teacher = new Role { Id = 101, Name = "Teacher" };
+            //Role parent = new Role { Id = 102, Name = "Parent" };
+            //Role student = new Role { Id = 103, Name = "Student" }; //may not be needed
 
-            PersonRole pr01admin = new PersonRole { Person = p01, Role = admin };
-            PersonRole pr01teacher = new PersonRole { Person = p01, Role = teacher };
-            PersonRole p02admin = new PersonRole { Person = p02, Role = admin };
-            PersonRole p03teacher = new PersonRole { Person = p03, Role = teacher };
-            PersonRole p04teacher = new PersonRole { Person = p04, Role = teacher };
-            PersonRole p05teacher = new PersonRole { Person = p05, Role = teacher };
-            PersonRole p06teacher = new PersonRole { Person = p06, Role = teacher };
-            PersonRole p07student = new PersonRole { Person = p07, Role = student };
-            PersonRole p08student = new PersonRole { Person = p08, Role = student };
-            PersonRole p09student = new PersonRole { Person = p09, Role = student };
-            PersonRole p10student = new PersonRole { Person = p10, Role = student };
-            PersonRole p11parent = new PersonRole { Person = p11, Role = parent };
-            PersonRole p12parent = new PersonRole { Person = p12, Role = parent };
+            PersonRole pr01admin = new PersonRole { Person = p01, Role = new Role { Id = 100, Name = "Admin" } };
+            PersonRole pr01teacher = new PersonRole { Person = p01, Role = new Role { Id = 101, Name = "Teacher" } };
+            PersonRole p02admin = new PersonRole { Person = p02, Role = new Role { Id = 100, Name = "Admin" } };
+            PersonRole p03teacher = new PersonRole { Person = p03, Role = new Role { Id = 101, Name = "Teacher" } };
+            PersonRole p04teacher = new PersonRole { Person = p04, Role = new Role { Id = 101, Name = "Teacher" } };
+            PersonRole p05teacher = new PersonRole { Person = p05, Role = new Role { Id = 101, Name = "Teacher" } };
+            PersonRole p06teacher = new PersonRole { Person = p06, Role = new Role { Id = 101, Name = "Teacher" } };
+            PersonRole p07student = new PersonRole { Person = p07, Role = new Role { Id = 103, Name = "Student" } };
+            PersonRole p08student = new PersonRole { Person = p08, Role = new Role { Id = 103, Name = "Student" } };
+            PersonRole p09student = new PersonRole { Person = p09, Role = new Role { Id = 103, Name = "Student" } };
+            PersonRole p10student = new PersonRole { Person = p10, Role = new Role { Id = 103, Name = "Student" } };
+            PersonRole p11parent = new PersonRole { Person = p11, Role = new Role { Id = 102, Name = "Parent" } };
+            PersonRole p12parent = new PersonRole { Person = p12, Role = new Role { Id = 102, Name = "Parent" } };
 
             personRoles.Add(pr01admin);
             personRoles.Add(pr01teacher);
@@ -128,6 +128,35 @@ namespace BlazorApp1.FakeDAL2
                 .ToArray();
             personRoles = null;
             personRoles = allBut.ToList<PersonRole>();
+        }
+
+        public List<PersonWithRoles> GetAllPersonsWithRoles()
+        {
+            List<Person> allPeopleWithRoles = personRoles.Select(x => x.Person)
+                .Distinct().ToList();
+
+            if (!allPeopleWithRoles.Any())
+                return null;
+
+            List<PersonWithRoles> result = new List<PersonWithRoles>();
+
+            foreach(Person p in allPeopleWithRoles)
+            {
+                List<Role> roles = personRoles.Where(x => x.Person.Equals(p))
+                    .Select(x => x.Role)
+                    .ToList<Role>();
+
+                result.Add(new PersonWithRoles
+                {
+                    Id = p.Id,
+                    Login = p.Login,
+                    BirthDate = p.BirthDate,
+                    Name = p.Name,
+                    Roles = roles
+                });
+            }
+
+            return result;
         }
     }
 }

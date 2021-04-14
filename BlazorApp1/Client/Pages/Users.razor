@@ -67,16 +67,18 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
+            <th scope="col">Roles</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Person u in personnel)
+        @foreach (PersonWithRoles u in personsWithRoles)
         {
             <tr>
                 <th scope="row">@u.Id</th>
                 <td>@u.Name</td>
+                <td>@u.RoleString</td>
                 <td>
                     <a href="@($"/persons/{u.Id}")" class="btn btn-primary">
                         <i class="oi oi-pencil"></i>
