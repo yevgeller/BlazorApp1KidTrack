@@ -22,6 +22,11 @@ namespace BlazorApp1.FakeDAL2
             roles.Add(student);
         }
 
+        public RoleDAL(List<Role> roles)
+        {
+            this.roles = roles;
+        }
+
         public List<Role> GetAllRoles()
         {
             return roles;

@@ -20,9 +20,11 @@ namespace BlazorApp1.Client.Pages
         NavigationManager nm { get; set; }
 
         PersonWithRoles newUser;
-        PersonDAL personsDAL;
-        RoleDAL roleDAL;
-        PersonRoleDAL personRoleDAL;
+        //PersonDAL personsDAL;
+        //RoleDAL roleDAL;
+        //PersonRoleDAL personRoleDAL;
+        MainDAL mainDAL;
+
         public string ErrorMessage { get; set; } = string.Empty;
         public bool showNewUI = false;
 
@@ -33,7 +35,7 @@ namespace BlazorApp1.Client.Pages
             Id = Id;
             if (Id > 0)
             {
-                PersonWithRoles p = personsDAL.GetPersonWithRolesForEdit(Id);
+                PersonWithRoles p = mainDAL.PersonDAL.GetPersonWithRolesForEdit(Id);
                 if (p != null)
                 {
                     newUser.Id = p.Id;
@@ -43,19 +45,24 @@ namespace BlazorApp1.Client.Pages
                     showNewUI = true;
                 }
             }
+            else
+            {
+
+                personnel = mainDAL.PersonDAL.GetPeople();
+            }
             base.OnParametersSet();
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            personsDAL = new PersonDAL();
+            mainDAL = new MainDAL();
+            //personsDAL = new PersonDAL();
             newUser = new PersonWithRoles();
-            personnel = personsDAL.GetPeople();
-            roleDAL = new RoleDAL();
-            allRoles = roleDAL.GetAllRoles();
-            personRoleDAL = new PersonRoleDAL();
-            personsWithRoles = personRoleDAL.GetAllPersonsWithRoles();
+            //roleDAL = new RoleDAL();
+            allRoles = mainDAL.RoleDAL.GetAllRoles();
+            //personRoleDAL = new PersonRoleDAL();
+            personsWithRoles = mainDAL.PersonRoleDAL.GetAllPersonsWithRoles();
         }
 
         private void ToggleNewUI()
@@ -65,8 +72,8 @@ namespace BlazorApp1.Client.Pages
 
         private void ToggleRole(bool added, string role)
         {
-            int roleId = allRoles.Where(x => x.Name == role).Select(x=>x.Id).First();
-            if(added)
+            int roleId = allRoles.Where(x => x.Name == role).Select(x => x.Id).First();
+            if (added)
             {
                 newUser.Roles.Add(new Role { Id = roleId, Name = role });
             }
@@ -102,14 +109,14 @@ namespace BlazorApp1.Client.Pages
                     Roles = newUser.Roles
                 };
 
-                personsDAL.EditPerson(toBeUpdated);
+                mainDAL.PersonDAL.EditPerson(toBeUpdated);
                 nm.NavigateTo("/persons/");
             }
             else
             {
                 ErrorMessage = string.Empty;
                 Person p = new Person { Id = 0, Name = newUser.Name };
-                personsDAL.AddPerson(p);
+                mainDAL.PersonDAL.AddPerson(p);
             }
 
             showNewUI = false;

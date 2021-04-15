@@ -41,6 +41,11 @@ namespace BlazorApp1.FakeDAL2
             persons.Add(p12);
         }
 
+        public PersonDAL(List<Person> persons)
+        {
+            this.persons = persons;
+        }
+
         public PersonRoleDAL LocalPersonRoleDAL
         {
             get
