@@ -10,7 +10,6 @@ namespace BlazorApp1.Client.Pages
 {
     public partial class Users
     {
-        List<Person> personnel;
         List<PersonWithRoles> personsWithRoles;
 
         [Parameter]
@@ -20,9 +19,6 @@ namespace BlazorApp1.Client.Pages
         NavigationManager nm { get; set; }
 
         PersonWithRoles newUser;
-        //PersonDAL personsDAL;
-        //RoleDAL roleDAL;
-        //PersonRoleDAL personRoleDAL;
         MainDAL mainDAL;
 
         public string ErrorMessage { get; set; } = string.Empty;
@@ -35,7 +31,7 @@ namespace BlazorApp1.Client.Pages
             Id = Id;
             if (Id > 0)
             {
-                PersonWithRoles p = mainDAL.PersonDAL.GetPersonWithRolesForEdit(Id);
+                PersonWithRoles p = mainDAL.GetPersonWithRolesForEdit(Id);
                 if (p != null)
                 {
                     newUser.Id = p.Id;
@@ -47,8 +43,7 @@ namespace BlazorApp1.Client.Pages
             }
             else
             {
-
-                personnel = mainDAL.PersonDAL.GetPeople();
+                personsWithRoles = mainDAL.GetAllPersonsWithRoles();
             }
             base.OnParametersSet();
         }
@@ -57,12 +52,9 @@ namespace BlazorApp1.Client.Pages
         {
             base.OnInitialized();
             mainDAL = new MainDAL();
-            //personsDAL = new PersonDAL();
             newUser = new PersonWithRoles();
-            //roleDAL = new RoleDAL();
-            allRoles = mainDAL.RoleDAL.GetAllRoles();
-            //personRoleDAL = new PersonRoleDAL();
-            personsWithRoles = mainDAL.PersonRoleDAL.GetAllPersonsWithRoles();
+            allRoles = mainDAL.GetAllRoles();
+            personsWithRoles = mainDAL.GetAllPersonsWithRoles();
         }
 
         private void ToggleNewUI()
@@ -109,14 +101,14 @@ namespace BlazorApp1.Client.Pages
                     Roles = newUser.Roles
                 };
 
-                mainDAL.PersonDAL.EditPerson(toBeUpdated);
+                mainDAL.EditPerson(toBeUpdated);
                 nm.NavigateTo("/persons/");
             }
             else
             {
                 ErrorMessage = string.Empty;
                 Person p = new Person { Id = 0, Name = newUser.Name };
-                mainDAL.PersonDAL.AddPerson(p);
+                mainDAL.AddPerson(p);
             }
 
             showNewUI = false;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlazorApp1.FakeDAL2
 {
-    public class MainDAL
+    public partial class MainDAL 
     {
         List<Person> persons;
         List<PersonRole> personRoles;
@@ -79,45 +79,6 @@ namespace BlazorApp1.FakeDAL2
             roles.Add(teacher);
             roles.Add(parent);
             roles.Add(student);
-        }
-
-        private PersonDAL personDAL;
-        public PersonDAL PersonDAL
-        {
-            get
-            {
-                if (personDAL == null)
-                {                    
-                    personDAL = new PersonDAL(persons);
-                }
-                return personDAL;
-            }
-        }
-
-        private PersonRoleDAL personRoleDAL;
-        public PersonRoleDAL PersonRoleDAL
-        {
-            get
-            {
-                if(personRoleDAL == null)
-                {
-                    personRoleDAL = new PersonRoleDAL(personRoles);
-                }
-                return personRoleDAL;
-            }
-        }
-
-        private RoleDAL roleDAL;
-        public RoleDAL RoleDAL
-        {
-            get
-            {
-                if(roleDAL == null)
-                {
-                    roleDAL = new RoleDAL(roles);
-                }
-                return roleDAL;
-            }
-        }
+        }        
     }
 }
