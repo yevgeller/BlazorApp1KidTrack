@@ -11,8 +11,8 @@ namespace BlazorApp1.FakeDAL2
         public List<Role> GetPersonRoles(Person person)
         {
             List<PersonRole> pr = personRoles.Where(x => x.Person.Id == person.Id).ToList();
-                     List<Role> roles = pr.Select(x => x.Role).ToList<Role>();
-                        return roles;
+            List<Role> roles = pr.Select(x => x.Role).ToList<Role>();
+            return roles;
         }
 
         public List<PersonRole> GetPersonRoles()
@@ -33,17 +33,17 @@ namespace BlazorApp1.FakeDAL2
         public void ChangePersonRoles(Person person, List<Role> freshRoles)
         {
             List<PersonRole> thisPersonsRoles = this.GetPersonRoles(person.Id);
-            foreach(PersonRole pr in thisPersonsRoles)
+            foreach (PersonRole pr in thisPersonsRoles)
             {
-                if(!freshRoles.Any(x=>x.Id == pr.Role.Id))
+                if (!freshRoles.Any(x => x.Id == pr.Role.Id))
                 {
                     this.RemovePersonRole(person, pr.Role);
                 }
             }
 
-            foreach(Role r in freshRoles)
+            foreach (Role r in freshRoles)
             {
-                if(!this.PersonHasRole(person, r))
+                if (!this.PersonHasRole(person, r))
                 {
                     this.AddRoleToPerson(person, r);
                 }
@@ -52,7 +52,7 @@ namespace BlazorApp1.FakeDAL2
 
         public void AddRoleToPerson(Person person, Role role)
         {
-            if(personRoles.Where(x=>x.Person.Id == person.Id && x.Role.Id == role.Id).Any())
+            if (personRoles.Where(x => x.Person.Id == person.Id && x.Role.Id == role.Id).Any())
             {
                 throw new Exception("There is already such a RolePerson object");
             }
@@ -67,24 +67,18 @@ namespace BlazorApp1.FakeDAL2
                 throw new Exception("No such a RolePerson object");
             }
 
-            PersonRole[] allBut = personRoles
-                .Where(x => x.Role.Id != role.Id && x.Person.Id != person.Id)
-                .ToArray();
-            personRoles = null;
-            personRoles = allBut.ToList<PersonRole>();
+            PersonRole toBeRemoved = personRoles
+                .Where(x => x.Role.Id == role.Id && x.Person.Id == person.Id)
+                .FirstOrDefault();
+
+            personRoles.Remove(toBeRemoved);
         }
 
         public List<PersonWithRoles> GetAllPersonsWithRoles()
         {
-            List<Person> allPeopleWithRoles = personRoles.Select(x => x.Person)
-                .Distinct().ToList();
-
-            if (!allPeopleWithRoles.Any())
-                return null;
-
             List<PersonWithRoles> result = new List<PersonWithRoles>();
 
-            foreach(Person p in allPeopleWithRoles)
+            foreach (Person p in persons)
             {
                 List<Role> roles = personRoles.Where(x => x.Person.Equals(p))
                     .Select(x => x.Role)
