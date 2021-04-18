@@ -18,6 +18,8 @@ namespace BlazorApp1.Shared.Models
 
         public string Login { get; set; }
 
+        public List<Room> TeacherRooms { get; set; }
+
         public virtual string ForDisplay()
         {
             return $"{Id}-{Name}-{Login}";
