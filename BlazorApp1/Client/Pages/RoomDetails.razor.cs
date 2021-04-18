@@ -17,7 +17,7 @@ namespace BlazorApp1.Client.Pages
         NavigationManager nm { get; set; }
 
         Room thisRoom;
-        RoomsDAL roomsDAL;
+        MainDAL mainDAL;
         //Teachers here
         //Participants here
         protected override void OnParametersSet()
@@ -25,14 +25,14 @@ namespace BlazorApp1.Client.Pages
             if (RoomId < 1)
                 throw new ArgumentException("Room id number is missing", "RoomId");
             RoomId = RoomId;
-            thisRoom = roomsDAL.GetRoom(RoomId);
+            thisRoom = mainDAL.GetRoom(RoomId);
             base.OnParametersSet();
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            roomsDAL = new RoomsDAL();
+            mainDAL = new MainDAL();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BlazorApp1.Client.Pages
         NavigationManager NavigationManager { get; set; }
 
         Room newRoom;
-        RoomsDAL roomsDAL;
+        MainDAL mainDAL;
 
         public string ErrorMessage { get; set; } = string.Empty;
         public bool NoErrors { get { return ErrorMessage == null || ErrorMessage.Length == 0; } }
@@ -47,9 +47,9 @@ namespace BlazorApp1.Client.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            roomsDAL = new RoomsDAL();
+            mainDAL = new MainDAL();
             newRoom = new Room();
-            rooms = roomsDAL.GetRooms();
+            rooms = mainDAL.GetRooms();
         }
 
         private void ToggleNewRoomInterface()
@@ -75,15 +75,15 @@ namespace BlazorApp1.Client.Pages
                         Description = newRoom.Description
                     };
                     
-                    roomsDAL.EditRoom(toBeUpdated);
+                    mainDAL.EditRoom(toBeUpdated);
                     NavigationManager.NavigateTo("/rooms/");
                 }
                 else
                 {
                     ErrorMessage = string.Empty;
                     Room r = new Room { Id = 0, Name = newRoom.Name, MaxCapacity = newRoom.MaxCapacity, Description = newRoom.Description };
-                    roomsDAL.AddRoom(r);
-                    rooms = roomsDAL.GetRooms();
+                    mainDAL.AddRoom(r);
+                    rooms = mainDAL.GetRooms();
                 }
 
                 newRoom = new Room();

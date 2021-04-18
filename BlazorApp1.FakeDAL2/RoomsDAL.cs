@@ -6,19 +6,34 @@ using System.Text;
 
 namespace BlazorApp1.FakeDAL2
 {
-    public class RoomsDAL
+    public partial class MainDAL
     {
-        List<Room> rooms;
+        //List<Room> rooms;
 
-        public RoomsDAL()
-        {
-            rooms = new List<Room>();
-            rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
-            rooms.Add(new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 });
-        }
+        //public RoomsDAL()
+        //{
+        //    rooms = new List<Room>();
+        //    rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
+        //    rooms.Add(new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 });
+        //}
 
         public List<Room> GetRooms()
         {
+            return rooms;
+        }
+
+        public List<Room> GetRoomsWithTeachers()
+        {
+            foreach(Room room in rooms)
+            {
+                List<Person> teachers = this.GetAllTeacherRoomAssignments()
+                    .Where(x=>x.Room.Id == room.Id)
+                    .Select(x=>x.Teacher)
+                    .ToList<Person>();
+
+                room.Teachers = teachers;
+            }
+
             return rooms;
         }
 
@@ -58,6 +73,5 @@ namespace BlazorApp1.FakeDAL2
             r.MaxCapacity = room.MaxCapacity;
             r.Description = room.Description;
         }
-
     }
 }

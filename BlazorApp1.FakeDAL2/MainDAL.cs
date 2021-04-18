@@ -11,6 +11,7 @@ namespace BlazorApp1.FakeDAL2
         List<PersonRole> personRoles;
         List<Role> roles;
         List<TeacherRoom> teacherRooms;
+        List<Room> rooms;
 
         public MainDAL()
         {
@@ -83,6 +84,11 @@ namespace BlazorApp1.FakeDAL2
 
             Room r1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
             Room r2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
+
+            rooms = new List<Room>();
+            rooms.Add(r1);
+            rooms.Add(r2);
+
 
             teacherRooms = new List<TeacherRoom>();
             teacherRooms.Add(new TeacherRoom { Room = r1, Teacher = p01 });

@@ -17,6 +17,8 @@ namespace BlazorApp1.Shared.Models
         [Range(1, 20, ErrorMessage = "Max Capacity must be a number between 1 and 20")]
         public int MaxCapacity { get; set; }
         
+        public List<Person> Teachers { get; set; }
+
         public string Description { get; set; }
         public string ForDisplay()
         {
