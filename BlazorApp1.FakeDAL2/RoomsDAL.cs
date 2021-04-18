@@ -24,14 +24,32 @@ namespace BlazorApp1.FakeDAL2
 
         public List<Room> GetRoomsWithTeachers()
         {
-            foreach(Room room in rooms)
+            foreach (Room room in rooms)
             {
                 List<Person> teachers = this.GetAllTeacherRoomAssignments()
-                    .Where(x=>x.Room.Id == room.Id)
-                    .Select(x=>x.Teacher)
+                    .Where(x => x.Room.Id == room.Id)
+                    .Select(x => x.Teacher)
                     .ToList<Person>();
 
                 room.Teachers = teachers;
+            }
+
+            return rooms;
+        }
+
+        public List<Room> GetRoomsWithTeachersAndStudents()
+        {
+            foreach (Room room in rooms)
+            {
+                List<Person> teachers = this.GetAllTeacherRoomAssignments()
+                    .Where(x => x.Room.Id == room.Id)
+                    .Select(x => x.Teacher)
+                    .ToList<Person>();
+
+                List<Person> students = GetStudentsInRoom(room);
+
+                room.Teachers = teachers;
+                room.Students = students;
             }
 
             return rooms;
@@ -44,7 +62,7 @@ namespace BlazorApp1.FakeDAL2
 
         public int AddRoom(Room room)
         {
-            if(room.Id == 0)
+            if (room.Id == 0)
             {
                 room.Id = rooms.Select(x => x.Id).Max() + 1;
             }

@@ -12,8 +12,9 @@ namespace BlazorApp1.FakeDAL2
         List<Role> roles;
         List<TeacherRoom> teacherRooms;
         List<Room> rooms;
+        List<StudentRoom> studentRooms;
 
-        public MainDAL()
+public MainDAL()
         {
             persons = new List<Person>();
             Person p01 = new Person { Id = 1, Name = "1AdminTeacher", Login = "aTeacher1" };
@@ -57,20 +58,22 @@ namespace BlazorApp1.FakeDAL2
             PersonRole p11parent = new PersonRole { Person = p11, Role = new Role { Id = 102, Name = "Parent" } };
             PersonRole p12parent = new PersonRole { Person = p12, Role = new Role { Id = 102, Name = "Parent" } };
 
-            personRoles = new List<PersonRole>();
-            personRoles.Add(pr01admin);
-            personRoles.Add(pr01teacher);
-            personRoles.Add(p02admin);
-            personRoles.Add(p03teacher);
-            personRoles.Add(p04teacher);
-            personRoles.Add(p05teacher);
-            personRoles.Add(p06teacher);
-            personRoles.Add(p07student);
-            personRoles.Add(p08student);
-            personRoles.Add(p09student);
-            personRoles.Add(p10student);
-            personRoles.Add(p11parent);
-            personRoles.Add(p12parent);
+            personRoles = new List<PersonRole>
+            {
+                pr01admin,
+                pr01teacher,
+                p02admin,
+                p03teacher,
+                p04teacher,
+                p05teacher,
+                p06teacher,
+                p07student,
+                p08student,
+                p09student,
+                p10student,
+                p11parent,
+                p12parent
+            };
 
             roles = new List<Role>();
             Role admin = new Role { Id = 100, Name = "Admin" };
@@ -85,16 +88,28 @@ namespace BlazorApp1.FakeDAL2
             Room r1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
             Room r2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
 
-            rooms = new List<Room>();
-            rooms.Add(r1);
-            rooms.Add(r2);
+            rooms = new List<Room>
+            {
+                r1,
+                r2
+            };
 
-            teacherRooms = new List<TeacherRoom>();
-            teacherRooms.Add(new TeacherRoom { Room = r1, Teacher = p01 });
-            teacherRooms.Add(new TeacherRoom { Room = r1, Teacher = p03 });
-            teacherRooms.Add(new TeacherRoom { Room = r2, Teacher = p04 });
-            teacherRooms.Add(new TeacherRoom { Room = r2, Teacher = p05 });
-            teacherRooms.Add(new TeacherRoom { Room = r2, Teacher = p06 });
+            teacherRooms = new List<TeacherRoom>
+            {
+                new TeacherRoom { Room = r1, Teacher = p01 },
+                new TeacherRoom { Room = r1, Teacher = p03 },
+                new TeacherRoom { Room = r2, Teacher = p04 },
+                new TeacherRoom { Room = r2, Teacher = p05 },
+                new TeacherRoom { Room = r2, Teacher = p06 }
+            };
+
+            studentRooms = new List<StudentRoom>
+            {
+                new StudentRoom { Id = 1, Room = r1, Student = p07 },
+                new StudentRoom { Id = 2, Room = r1, Student = p08 },
+                new StudentRoom { Id = 3, Room = r2, Student = p09 },
+                new StudentRoom { Id = 4, Room = r2, Student = p10 }
+            };
         }
     }
 }

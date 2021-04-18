@@ -49,7 +49,7 @@ namespace BlazorApp1.Client.Pages
             base.OnInitialized();
             mainDAL = new MainDAL();
             newRoom = new Room();
-            rooms = mainDAL.GetRooms();
+            rooms = mainDAL.GetRoomsWithTeachersAndStudents();
         }
 
         private void ToggleNewRoomInterface()
@@ -83,7 +83,7 @@ namespace BlazorApp1.Client.Pages
                     ErrorMessage = string.Empty;
                     Room r = new Room { Id = 0, Name = newRoom.Name, MaxCapacity = newRoom.MaxCapacity, Description = newRoom.Description };
                     mainDAL.AddRoom(r);
-                    rooms = mainDAL.GetRooms();
+                    rooms = mainDAL.GetRoomsWithTeachersAndStudents();
                 }
 
                 newRoom = new Room();

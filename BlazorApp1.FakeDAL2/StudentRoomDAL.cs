@@ -6,27 +6,27 @@ using System.Text;
 
 namespace BlazorApp1.FakeDAL2
 {
-    public class StudentRoomDAL
+    public partial class MainDAL
     {
-        private List<StudentRoom> studentRooms;
+        //private List<StudentRoom> studentRooms;
 
-        public StudentRoomDAL()
-        {
-            studentRooms = new List<StudentRoom>();
+        //public StudentRoomDAL()
+        //{
+        //    studentRooms = new List<StudentRoom>();
 
-            Room r1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
-            Room r2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
+        //    Room r1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
+        //    Room r2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
 
-            Person p07 = new Person { Id = 7, Name = "7Student1" };
-            Person p08 = new Person { Id = 8, Name = "8Student2" };
-            Person p09 = new Person { Id = 9, Name = "9Student3" };
-            Person p10 = new Person { Id = 10, Name = "10Student4" };
+        //    Person p07 = new Person { Id = 7, Name = "7Student1" };
+        //    Person p08 = new Person { Id = 8, Name = "8Student2" };
+        //    Person p09 = new Person { Id = 9, Name = "9Student3" };
+        //    Person p10 = new Person { Id = 10, Name = "10Student4" };
 
-            studentRooms.Add(new StudentRoom { Id=1, Room = r1, Student = p07 });
-            studentRooms.Add(new StudentRoom { Id=2, Room = r1, Student = p08 });
-            studentRooms.Add(new StudentRoom { Id=3, Room = r2, Student = p09 });
-            studentRooms.Add(new StudentRoom { Id=4, Room = r2, Student = p10 });
-        }
+        //    studentRooms.Add(new StudentRoom { Id=1, Room = r1, Student = p07 });
+        //    studentRooms.Add(new StudentRoom { Id=2, Room = r1, Student = p08 });
+        //    studentRooms.Add(new StudentRoom { Id=3, Room = r2, Student = p09 });
+        //    studentRooms.Add(new StudentRoom { Id=4, Room = r2, Student = p10 });
+        //}
 
         private int GetNextIdentityValue()
         {
@@ -34,9 +34,12 @@ namespace BlazorApp1.FakeDAL2
             return next;
         }
 
-        public List<StudentRoom> GetStudentsInRoom(Room room)
+        public List<Person> GetStudentsInRoom(Room room)
         {
-            return studentRooms.Where(x => x.Room.Id == room.Id).ToList();
+            return studentRooms
+                .Where(x => x.Room.Id == room.Id)
+                .Select(x=>x.Student)
+                .ToList();
         }
 
         public int AddStudentToRoom(Person student, Room room)

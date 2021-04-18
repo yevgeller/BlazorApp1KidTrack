@@ -18,6 +18,7 @@ namespace BlazorApp1.Shared.Models
         public int MaxCapacity { get; set; }
         
         public List<Person> Teachers { get; set; }
+        public List<Person> Students { get; set; }
 
         public string Description { get; set; }
         public string ForDisplay()

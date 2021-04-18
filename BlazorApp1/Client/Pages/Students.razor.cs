@@ -16,9 +16,9 @@ namespace BlazorApp1.Client.Pages
          * stating what room they're in and who are the teachers
          */
 
-        MainDAL mainDAL;
+        //MainDAL mainDAL;
 
-        List<Room> rooms;
+        //List<Room> rooms;
 
         [Parameter]
         public int Id { get; set; }

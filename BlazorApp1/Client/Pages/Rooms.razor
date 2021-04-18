@@ -70,6 +70,19 @@
                     </a>
                 </td>
             </tr>
+            if (r.Teachers != null && r.Teachers.Any())
+            {
+                <tr>
+                    <td colspan="5">Teachers: @String.Join(';', r.Teachers.Select(x => x.ForDisplay()))</td>
+                </tr>
+            }
+
+            if (r.Students != null && r.Students.Any())
+            {
+                <tr>
+                    <td colspan="5">Students: @String.Join(';', r.Students.Select(x=>x.ForDisplay()))</td>
+                </tr>
+            }
         }
     </tbody>
 </table>
