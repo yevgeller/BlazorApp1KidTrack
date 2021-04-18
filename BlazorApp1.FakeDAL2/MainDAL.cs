@@ -89,7 +89,6 @@ namespace BlazorApp1.FakeDAL2
             rooms.Add(r1);
             rooms.Add(r2);
 
-
             teacherRooms = new List<TeacherRoom>();
             teacherRooms.Add(new TeacherRoom { Room = r1, Teacher = p01 });
             teacherRooms.Add(new TeacherRoom { Room = r1, Teacher = p03 });
