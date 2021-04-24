@@ -17,18 +17,18 @@ namespace BlazorApp1.FakeDAL2
 public MainDAL()
         {
             persons = new List<Person>();
-            Person p01 = new Person { Id = 1, Name = "1AdminTeacher", Login = "aTeacher1" };
-            Person p02 = new Person { Id = 2, Name = "2JustAdmin", Login = "jAdmin2" };
-            Person p03 = new Person { Id = 3, Name = "3JustTeacher1", Login = "jTeacher3" };
-            Person p04 = new Person { Id = 4, Name = "4JustTeacher2", Login = "t2" };
-            Person p05 = new Person { Id = 5, Name = "5JustTeacher3", Login = "t3" };
-            Person p06 = new Person { Id = 6, Name = "6JustTeacher4", Login = "t4" };
-            Person p07 = new Person { Id = 7, Name = "7Student1", Login = "s1" };
-            Person p08 = new Person { Id = 8, Name = "8Student2", Login = "s2" };
-            Person p09 = new Person { Id = 9, Name = "9Student3", Login = "s3" };
-            Person p10 = new Person { Id = 10, Name = "10Student4", Login = "s4" };
-            Person p11 = new Person { Id = 11, Name = "11Parent", Login = "p11" };
-            Person p12 = new Person { Id = 12, Name = "12Parent", Login = "p12" };
+            Person p01 = new Person { Id = 1, Name = "Adminateachy", Login = "ateachy1" };
+            Person p02 = new Person { Id = 2, Name = "Admins", Login = "mAdmins2" };
+            Person p03 = new Person { Id = 3, Name = "Tiana Perkins", Login = "tper3" };
+            Person p04 = new Person { Id = 4, Name = "Tony Smith", Login = "tsmith4" };
+            Person p05 = new Person { Id = 5, Name = "Terry Pratchett", Login = "tpra5" };
+            Person p06 = new Person { Id = 6, Name = "Tennis Court", Login = "tcourt6" };
+            Person p07 = new Person { Id = 7, Name = "Styles Green", Login = "sgreen7" };
+            Person p08 = new Person { Id = 8, Name = "Sandra Collins", Login = "sco8" };
+            Person p09 = new Person { Id = 9, Name = "Suzy Ormond", Login = "sormo9" };
+            Person p10 = new Person { Id = 10, Name = "Stella Kings", Login = "skings10" };
+            Person p11 = new Person { Id = 11, Name = "Perry Johnson", Login = "pjoh11" };
+            Person p12 = new Person { Id = 12, Name = "Petra Schevich", Login = "psche12" };
 
             persons.Add(p01);
             persons.Add(p02);
