@@ -25,7 +25,7 @@ namespace BlazorApp1.Client.Pages
             if (RoomId < 1)
                 throw new ArgumentException("Room id number is missing", "RoomId");
             RoomId = RoomId;
-            thisRoom = mainDAL.GetRoom(RoomId);
+            thisRoom = mainDAL.GetRoomWithTeachersAndStudents(RoomId);
             base.OnParametersSet();
         }
 

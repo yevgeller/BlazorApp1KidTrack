@@ -8,15 +8,6 @@ namespace BlazorApp1.FakeDAL2
 {
     public partial class MainDAL
     {
-        //List<Room> rooms;
-
-        //public RoomsDAL()
-        //{
-        //    rooms = new List<Room>();
-        //    rooms.Add(new Room { Id = 1, Name = "First Room", MaxCapacity = 10 });
-        //    rooms.Add(new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 });
-        //}
-
         public List<Room> GetRooms()
         {
             return rooms;
@@ -57,7 +48,23 @@ namespace BlazorApp1.FakeDAL2
 
         public Room GetRoom(int roomId)
         {
-            return rooms.Where(x => x.Id == roomId).FirstOrDefault();
+            Room room = rooms.Where(x => x.Id == roomId).FirstOrDefault();
+            return room;
+        }
+
+        public Room GetRoomWithTeachersAndStudents(int roomId)
+        {
+            Room room = rooms.Where(x => x.Id == roomId).FirstOrDefault();
+            List<Person> teachers = this.GetAllTeacherRoomAssignments()
+                               .Where(x => x.Room.Id == room.Id)
+                               .Select(x => x.Teacher)
+                               .ToList<Person>();
+
+            List<Person> students = GetStudentsInRoom(room);
+
+            room.Teachers = teachers;
+            room.Students = students;
+            return room;
         }
 
         public int AddRoom(Room room)

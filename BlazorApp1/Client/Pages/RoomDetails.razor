@@ -8,3 +8,19 @@
 <br />
 @thisRoom.MaxCapacity
 <br />
+
+<h4>Students:</h4>
+
+@foreach(BlazorApp1.Shared.Models.Person p in thisRoom.Students)
+            {
+                @p.ForDisplay();
+            }
+
+<h4>Teachers</h4>
+
+@foreach (BlazorApp1.Shared.Models.Person p in thisRoom.Teachers)
+{
+    <div>
+        @p.ForDisplay();
+    </div>
+}
