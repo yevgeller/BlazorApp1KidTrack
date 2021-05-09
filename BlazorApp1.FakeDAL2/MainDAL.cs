@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlazorApp1.FakeDAL2
 {
-    public partial class MainDAL 
+    public partial class MainDAL
     {
         List<Person> persons;
         List<PersonRole> personRoles;
@@ -14,7 +14,7 @@ namespace BlazorApp1.FakeDAL2
         List<Room> rooms;
         List<StudentRoom> studentRooms;
 
-public MainDAL()
+        public MainDAL()
         {
             persons = new List<Person>();
             Person p01 = new Person { Id = 1, Name = "Adminateachy", Login = "ateachy1" };

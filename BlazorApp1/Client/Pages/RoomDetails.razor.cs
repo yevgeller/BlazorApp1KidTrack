@@ -18,14 +18,21 @@ namespace BlazorApp1.Client.Pages
 
         Room thisRoom;
         MainDAL mainDAL;
-        //Teachers here
-        //Participants here
+        List<int> allTeacherIds;
+        List<int> allStudentIds;
+        List<Role> roles;
+
         protected override void OnParametersSet()
         {
             if (RoomId < 1)
                 throw new ArgumentException("Room id number is missing", "RoomId");
             RoomId = RoomId;
+            roles = mainDAL.GetAllRoles();
+            Role teacherRole = roles.Where(x => x.Name.ToLower().Contains("teacher")).First();
+            Role studentRole = roles.Where(x => x.Name.ToLower().Contains("student")).First();
             thisRoom = mainDAL.GetRoomWithTeachersAndStudents(RoomId);
+            allTeacherIds = mainDAL.GetAllPersonsInRole(new Role { Id = teacherRole.Id, Name = teacherRole.Name }).Select(x => x.Id).ToList();
+            allStudentIds = mainDAL.GetAllPersonsInRole(new Role { Id = studentRole.Id, Name = studentRole.Name }).Select(x => x.Id).ToList(); ;
             base.OnParametersSet();
         }
 

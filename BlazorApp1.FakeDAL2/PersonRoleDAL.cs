@@ -96,5 +96,14 @@ namespace BlazorApp1.FakeDAL2
 
             return result;
         }
+
+        public List<Person> GetAllPersonsInRole(Role role)
+        {
+            List<Person> allInThisRole = personRoles.Where(x => x.Role.Id == role.Id)
+                .Select(x => x.Person)
+                .ToList();
+
+            return allInThisRole;
+        }
     }
 }

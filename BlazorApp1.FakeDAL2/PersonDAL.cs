@@ -47,17 +47,20 @@ namespace BlazorApp1.FakeDAL2
 
         public List<Person> GetPeople()
         {
-            return persons;
+            throw new NotImplementedException();
+            //return persons;
         }
 
         public List<Person> GetPeopleByName(string name)
         {
-            return persons.Where(x => x.Name == name).ToList();
+            throw new NotImplementedException();
+            //return persons.Where(x => x.Name == name).ToList();
         }
 
         public Person GetPersonById(int id)
         {
-            return persons.Where(x => x.Id == id).FirstOrDefault();
+            throw new NotImplementedException();
+            //return persons.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public void EditPerson(PersonWithRoles newData)

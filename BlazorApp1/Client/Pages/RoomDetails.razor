@@ -1,20 +1,26 @@
 ﻿@page "/roomDetails/{RoomId:int}"
 
-<h3>RoomDetails</h3>
+<h2>Details for Room @thisRoom.Name</h2>
+@if (thisRoom.Description?.Length > 0)
+{
+    <h3>Description: @thisRoom.Description</h3>
+}
 
-@thisRoom.Id
-<br />
-@thisRoom.Name
-<br />
-@thisRoom.MaxCapacity
-<br />
+@if (thisRoom.MaxCapacity > 0)
+{
+    <h3>Maximum Capacity: @thisRoom.MaxCapacity</h3>
+}
 
 <h4>Students:</h4>
 
-@foreach(BlazorApp1.Shared.Models.Person p in thisRoom.Students)
-            {
-                @p.ForDisplay();
-            }
+@foreach (BlazorApp1.Shared.Models.Person p in thisRoom.Students)
+{
+    @p.ForDisplay();
+    if (allStudentIds.Contains(p.Id))
+    {
+        <span style="color: red;">yes</span>
+    }
+}
 
 <h4>Teachers</h4>
 
@@ -22,5 +28,9 @@
 {
     <div>
         @p.ForDisplay();
+        if(allTeacherIds.Contains(p.Id))
+        {
+        <span style="color: red;">yes</span>
+        }
     </div>
 }
