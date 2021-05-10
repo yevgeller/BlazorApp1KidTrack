@@ -14,6 +14,11 @@ namespace BlazorApp1.FakeDAL2
             return next;
         }
 
+        public List<StudentRoom> GetAllStudentRoomAssignments()
+        {
+            return studentRooms;
+        }
+
         public List<Person> GetStudentsInRoom(Room room)
         {
             return studentRooms

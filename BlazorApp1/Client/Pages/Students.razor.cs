@@ -10,13 +10,9 @@ namespace BlazorApp1.Client.Pages
 {
     public partial class Students
     {
-        /*
-         * List of students 
-         * (people with role of student or no role at all)
-         * stating what room they're in and who are the teachers
-         */
+        MainDAL mainDAL;
 
-        //MainDAL mainDAL;
+        List<StudentRoom> allStudentRooms;
 
         //List<Room> rooms;
 
@@ -38,6 +34,14 @@ namespace BlazorApp1.Client.Pages
                 //}
             }
             base.OnParametersSet();
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            mainDAL = new MainDAL();
+
+            allStudentRooms = mainDAL.GetAllStudentRoomAssignments();
         }
 
     }

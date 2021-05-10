@@ -1,5 +1,36 @@
-﻿<h3>Students</h3>
+﻿@page "/studentRooms/"
+@page "/studentRooms/{Id:int}"
 
-@code {
+<h3>Students</h3>
 
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Student</th>
+            <th scope="col">Room</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (BlazorApp1.Shared.Models.StudentRoom sr in allStudentRooms)
+        {
+            <tr>
+                <th scope="row">@sr.Id</th>
+                <td>@sr.Student.ForDisplay();</td>
+                <td>@sr.Room.ForDisplay()</td>
+                <td>
+                    <a href="@($"/studentRooms/{sr.Id}")" class="btn btn-primary">
+                        <i class="oi oi-pencil"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="" class="btn btn-primary">
+                        <i class="oi oi-delete"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
