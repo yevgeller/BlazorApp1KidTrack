@@ -11,26 +11,63 @@
             <th scope="col">Room</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (BlazorApp1.Shared.Models.StudentRoom sr in allStudentRooms)
         {
-            <tr>
-                <th scope="row">@sr.Id</th>
-                <td>@sr.Student.ForDisplay();</td>
-                <td>@sr.Room.ForDisplay()</td>
-                <td>
-                    <a href="@($"/studentRooms/{sr.Id}")" class="btn btn-primary">
-                        <i class="oi oi-pencil"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="" class="btn btn-primary">
-                        <i class="oi oi-delete"></i>
-                    </a>
-                </td>
-            </tr>
+            if (sr.Id == EditingThisId)
+            {
+                <tr>
+                    <th scope="row">@sr.Id</th>
+                    <td>@sr.Student.ForDisplay()</td>
+                    <td>
+                        <select class="form-control" @bind="selectedRoom">
+                            @foreach (BlazorApp1.Shared.Models.Room r in allRooms)
+                            {
+                                <option id="@r.Id">@r.Name</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" @onclick="() => SaveEdits(sr)">
+                            <i class="oi oi-circle-check"></i> Save
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" @onclick="() => CancelEdit()">
+                            <i class="oi oi-circle-x"></i> Cancel
+                        </button>
+                    </td>
+                    <td>
+                        Record for @sr.Id (@sr.Room.ForDisplay() -- @sr.Student.ForDisplay()) is being edited
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th scope="row">@sr.Id</th>
+                    <td>@sr.Student.ForDisplay();</td>
+                    <td>@sr.Room.ForDisplay()</td>
+                    <td>
+                        <a href="@($"/studentRooms/{sr.Id}")" class="btn btn-primary">
+                            <i class="oi oi-pencil"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="" class="btn btn-primary">
+                            <i class="oi oi-delete"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => SetEditable(sr)">
+                            <i class="oi oi-account-login"></i> Edit
+                        </button>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
