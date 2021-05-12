@@ -52,6 +52,7 @@ namespace BlazorApp1.Client.Pages
 
         void CancelEdit()
         {
+            selectedRoom = -1;
             EditingThisId = -1;
         }
 

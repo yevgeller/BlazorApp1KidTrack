@@ -2,7 +2,8 @@
 @page "/studentRooms/{Id:int}"
 
 <h3>Students</h3>
-
+<span>Selected Room: @selectedRoom</span>
+<span>Editing Id: @EditingThisId</span>
 <table class="table">
     <thead>
         <tr>
@@ -23,21 +24,28 @@
                     <th scope="row">@sr.Id</th>
                     <td>@sr.Student.ForDisplay()</td>
                     <td>
-                        <select class="form-control" @bind="selectedRoom">
+                        <select class="form-control" style="width:250px;" @bind="@sr.Room.Id">
                             @foreach (BlazorApp1.Shared.Models.Room r in allRooms)
                             {
-                                <option id="@r.Id">@r.Name</option>
+                                if (sr.Room.Id == r.Id)
+                                {
+                                    <option value="@sr.Room.Id" selected>@r.Name + 123</option>
+                                }
+                                else
+                                {
+                                <option value="@r.Id">@r.Name</option>
+                                }
                             }
                         </select>
                     </td>
                     <td>
                         <button class="btn btn-success" @onclick="() => SaveEdits(sr)">
-                            <i class="oi oi-circle-check"></i> Save
+                            <i class="oi oi-circle-check"></i>
                         </button>
                     </td>
                     <td>
                         <button class="btn btn-success" @onclick="() => CancelEdit()">
-                            <i class="oi oi-circle-x"></i> Cancel
+                            <i class="oi oi-circle-x"></i>
                         </button>
                     </td>
                     <td>
