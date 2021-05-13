@@ -49,5 +49,24 @@ namespace BlazorApp1.FakeDAL2
             int numberRemoved = studentRooms.RemoveAll(x => x.Room.Id == room.Id && x.Student.Id == student.Id);
             return numberRemoved;
         }
+
+        public void ChangeRoomAssignmentForAStudent(int studentRoomAssignmentId, int newRoomId)
+        {
+            StudentRoom sr = studentRooms.Where(x => x.Id == studentRoomAssignmentId).FirstOrDefault();
+            Person thisStudent = persons.Where(x => x.Id == sr.Student.Id).FirstOrDefault();
+            Room thisRoom = rooms.Where(x => x.Id == newRoomId).First();
+            Person refreshedStudent = new Person { Id = thisStudent.Id, Name = thisStudent.Name, Login = thisStudent.Login };
+            Room refreshedRoom = new Room { Id = thisRoom.Id, Name = thisRoom.Name, Description = thisRoom.Description, MaxCapacity = thisRoom.MaxCapacity };
+
+            sr.Room = null;
+            sr.Student = null;
+            sr.Room = refreshedRoom;
+            sr.Student = refreshedStudent;
+        }
+
+        public void RemoveStudentRoomAssignment(int id)
+        {
+            studentRooms.RemoveAll(x => x.Id == id);
+        }
     }
 }

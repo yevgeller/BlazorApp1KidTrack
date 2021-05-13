@@ -31,11 +31,7 @@ namespace BlazorApp1.Client.Pages
             Id = Id;
             if(Id > 0)
             {
-                //Person p = mainDAL.GetStudentRoomAssignments();
-                //if(p != null)
-                //{
-
-                //}
+               
             }
             base.OnParametersSet();
         }
@@ -47,7 +43,10 @@ namespace BlazorApp1.Client.Pages
 
         void SaveEdits(StudentRoom editableStudentRoom)
         {
-            int newRoomId = selectedRoom;
+            mainDAL.ChangeRoomAssignmentForAStudent(editableStudentRoom.Id, editableStudentRoom.Room.Id);
+            selectedRoom = -1;
+            EditingThisId = -1;
+            RefreshData();
         }
 
         void CancelEdit()
@@ -55,13 +54,22 @@ namespace BlazorApp1.Client.Pages
             selectedRoom = -1;
             EditingThisId = -1;
         }
+        public void RemoveStudentRoomAssignment(int studentRoomAssignmentId)
+        {
+            mainDAL.RemoveStudentRoomAssignment(studentRoomAssignmentId);
+        }
+
+        private void RefreshData()
+        {
+            allStudentRooms = mainDAL.GetAllStudentRoomAssignments();
+        }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
             mainDAL = new MainDAL();
             EditingThisId = -1;
-            allStudentRooms = mainDAL.GetAllStudentRoomAssignments();
+            RefreshData();
             allRooms = mainDAL.GetRooms();
         }
 

@@ -87,6 +87,9 @@ namespace BlazorApp1.FakeDAL2
 
             Room r1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
             Room r2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
+            Room r1_1 = new Room { Id = 1, Name = "First Room", MaxCapacity = 10 };
+            Room r2_1 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
+            Room r2_2 = new Room { Id = 2, Name = "Secon Room", MaxCapacity = 8 };
 
             rooms = new List<Room>
             {
@@ -97,18 +100,18 @@ namespace BlazorApp1.FakeDAL2
             teacherRooms = new List<TeacherRoom>
             {
                 new TeacherRoom { Room = r1, Teacher = p01 },
-                new TeacherRoom { Room = r1, Teacher = p03 },
+                new TeacherRoom { Room = r1_1, Teacher = p03 },
                 new TeacherRoom { Room = r2, Teacher = p04 },
-                new TeacherRoom { Room = r2, Teacher = p05 },
-                new TeacherRoom { Room = r2, Teacher = p06 }
+                new TeacherRoom { Room = r2_1, Teacher = p05 },
+                new TeacherRoom { Room = r2_2, Teacher = p06 }
             };
 
             studentRooms = new List<StudentRoom>
             {
                 new StudentRoom { Id = 1, Room = r1, Student = p07 },
-                new StudentRoom { Id = 2, Room = r1, Student = p08 },
+                new StudentRoom { Id = 2, Room = r1_1, Student = p08 },
                 new StudentRoom { Id = 3, Room = r2, Student = p09 },
-                new StudentRoom { Id = 4, Room = r2, Student = p10 }
+                new StudentRoom { Id = 4, Room = r2_1, Student = p10 }
             };
         }
     }
