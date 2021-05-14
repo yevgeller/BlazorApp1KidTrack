@@ -29,7 +29,7 @@
                             {
                                 if (sr.Room.Id == r.Id)
                                 {
-                                    <option value="@sr.Room.Id" selected>@r.Name + 123</option>
+                                    <option value="@sr.Room.Id" selected>@r.Name</option>
                                 }
                                 else
                                 {
@@ -48,42 +48,29 @@
                             <i class="oi oi-circle-x"></i>
                         </button>
                     </td>
-                    <td>
-                        Record for @sr.Id (@sr.Room.ForDisplay() -- @sr.Student.ForDisplay()) is being edited
-                    </td>
                 </tr>
             }
             else
             {
-                <tr>
-                    <th scope="row">@sr.Id</th>
-                    <td>@sr.Student.ForDisplay();</td>
-                    <td>@sr.Room.ForDisplay()</td>
-                    <td>
-                        @if (EditingThisId < 0)
-                        {
-                            <button class="btn btn-primary" @onclick="() => RemoveStudentRoomAssignment(sr.Id)">
-                                <i class="oi oi-delete"></i>
-                            </button>
-                        }
-                    </td>
-                    <td style="min-width:100px;">
-                        <button class="btn btn-primary" @onclick="() => SetEditable(sr)">
-                            <i class="oi oi-account-login"></i> Edit
-                        </button>
-                    </td>
-                    <td>
-                        Record for @sr.Id (@sr.Room.ForDisplay() -- @sr.Student.ForDisplay()) is being edited
-                    </td>
-                </tr>
+    <tr>
+        <th scope="row">@sr.Id</th>
+        <td>@sr.Student.ForDisplay();</td>
+        <td>@sr.Room.ForDisplay()</td>
+        <td style="min-width:100px;">
+            <button class="btn btn-primary" @onclick="() => SetEditable(sr)">
+                <i class="oi oi-account-login"></i> Edit
+            </button>
+        </td>
+        <td>
+            @if (EditingThisId < 0)
+            {
+                <button class="btn btn-primary" @onclick="() => RemoveStudentRoomAssignment(sr.Id)">
+                    <i class="oi oi-delete"></i>
+                </button>
+            }
+        </td>
+    </tr>
             }
         }
     </tbody>
 </table>
-
-<ul>
-    @foreach (BlazorApp1.Shared.Models.StudentRoom sr in allStudentRooms)
-    {
-        <li>@sr.Id // @sr.Room.ForDisplay() // @sr.Student.ForDisplay() </li>
-    }
-</ul>

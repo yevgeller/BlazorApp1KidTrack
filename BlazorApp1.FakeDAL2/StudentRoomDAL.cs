@@ -58,10 +58,22 @@ namespace BlazorApp1.FakeDAL2
             Person refreshedStudent = new Person { Id = thisStudent.Id, Name = thisStudent.Name, Login = thisStudent.Login };
             Room refreshedRoom = new Room { Id = thisRoom.Id, Name = thisRoom.Name, Description = thisRoom.Description, MaxCapacity = thisRoom.MaxCapacity };
 
-            sr.Room = null;
-            sr.Student = null;
-            sr.Room = refreshedRoom;
-            sr.Student = refreshedStudent;
+            studentRooms.RemoveAll(x => x.Id == studentRoomAssignmentId);
+
+            studentRooms.Add(new StudentRoom
+            {
+                Id = studentRoomAssignmentId,
+                Student = new Person { Id = thisStudent.Id,
+                    Name = thisStudent.Name, Login = thisStudent.Login, BirthDate = thisStudent.BirthDate
+                },
+                Room = new Room
+                {
+                    Id = thisRoom.Id,
+                    Name = thisRoom.Name,
+                    Description = thisRoom.Description,
+                    MaxCapacity = thisRoom.MaxCapacity
+                }
+            });
         }
 
         public void RemoveStudentRoomAssignment(int id)
