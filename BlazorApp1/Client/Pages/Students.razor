@@ -58,14 +58,14 @@
         <td>@sr.Room.ForDisplay()</td>
         <td style="min-width:100px;">
             <button class="btn btn-primary" @onclick="() => SetEditable(sr)">
-                <i class="oi oi-account-login"></i> Edit
+                <i class="oi oi-pencil"></i> Edit
             </button>
         </td>
         <td>
             @if (EditingThisId < 0)
             {
                 <button class="btn btn-primary" @onclick="() => RemoveStudentRoomAssignment(sr.Id)">
-                    <i class="oi oi-delete"></i>
+                    <i class="oi oi-trash"></i> Unassign
                 </button>
             }
         </td>

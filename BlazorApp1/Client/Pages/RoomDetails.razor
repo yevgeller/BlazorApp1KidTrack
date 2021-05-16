@@ -14,15 +14,12 @@
 <h4>Assigned Teachers</h4>
 @if (thisRoom.Teachers.Any())
 {
-    <ul>
-        @foreach (BlazorApp1.Shared.Models.Person p in thisRoom.Teachers)
-        {
-            <li>
-                @p.ForDisplay();
-            </li>
-        }
-    </ul>
+    @for (int i = 0; i < thisRoom.Teachers.Count; i++) //(BlazorApp1.Shared.Models.Person p in thisRoom.Teachers)
+    {
+        <span>@thisRoom.Teachers[i].ForDisplay(),</span>
+    }
 }
+<br />
 
 <h4>Assigned Students:</h4>
 @if (thisRoom.Students.Any())
@@ -36,3 +33,27 @@
         }
     </ul>
 }
+
+<hr />
+
+<div class="form-group">
+    <label for="classActivity">Record activity for the entire classroom</label>
+    <textarea class="form-control" rows="3" cols="50" id="classActivity" />
+    <small id="classActivityHelp" class="form-text text-muted">This will be shared with all parents </small>
+</div>
+<div class="form-group">
+    <label for="activityDate">Activity date</label>
+    <button class="btn btn-secondary" type="button" @onclick="PrevDay" disabled="@TooFarInThePast()">
+        <i class="oi oi-media-skip-backward"></i>
+    </button>
+    <input type="text" @bind="GroupActivityDate" disabled id="activityDate" />
+    <button class="btn btn-secondary" type="button" @onclick="NextDay" disabled="@TooFarInTheFuture()">
+        <i class="oi oi-media-skip-forward"></i>
+    </button>
+    <small id="classActivityHelp" class="form-text text-muted">Can only record for up to a week in the past or future.</small>
+</div>
+<div class="form-group">
+    <button type="button" class="btn btn-primary">
+        <i class="oi oi-check"></i> Save
+    </button>
+</div>
