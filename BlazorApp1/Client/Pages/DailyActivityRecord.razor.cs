@@ -12,6 +12,7 @@ namespace BlazorApp1.Client.Pages
     {
         MainDAL mainDAL;
 
+        Person student;
         //List<StudentRoom> allStudentRooms;
 
         //List<Room> rooms;
@@ -26,6 +27,70 @@ namespace BlazorApp1.Client.Pages
         [Inject]
         NavigationManager nm { get; set; }
 
+        DateTime groupActivityDateVar;
+        DateTime groupActivityTimeVar;
+        public string GroupActivityDate
+        {
+            get
+            {
+                return groupActivityDateVar.ToString("ddd d MMM");
+            }
+            private set { }
+        }
+        public string GroupActivityTime
+        {
+            get
+            {
+                return groupActivityTimeVar.ToString("h:mm");
+            }
+            private set { }
+        }
+        public bool TooFarInTheFuture()
+        {
+            if (DateTime.Now.AddDays(7) < groupActivityDateVar)
+                return true;
+
+            return false;
+        }
+
+        public bool TooFarInThePast()
+        {
+            if (DateTime.Now.AddDays(-7) > groupActivityDateVar)
+                return true;
+
+            return false;
+        }
+
+        public void PrevDay()
+        {
+            var dayOfWeek = groupActivityDateVar.DayOfWeek;
+            int increment = -1;
+            if (dayOfWeek == DayOfWeek.Monday)
+            {
+                increment = -3;
+            }
+            groupActivityDateVar = groupActivityDateVar.AddDays(increment);
+        }
+
+        public void NextDay()
+        {
+            var dayOfWeek = groupActivityDateVar.DayOfWeek;
+            int increment = 1;
+            if (dayOfWeek == DayOfWeek.Friday)
+            {
+                increment = 3;
+            }
+            groupActivityDateVar = groupActivityDateVar.AddDays(increment);
+        }
+        public void FifteenMinPrior()
+        {
+            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(-15);
+        }
+
+        public void FifteenMinFwd()
+        {
+            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(15);
+        }
         protected override void OnParametersSet()
         {
             StudentId = StudentId;
@@ -34,6 +99,9 @@ namespace BlazorApp1.Client.Pages
         protected override void OnInitialized()
         {
             mainDAL = new MainDAL();
+            student = mainDAL.GetPersonById(StudentId);
+            groupActivityDateVar = DateTime.Now;
+            groupActivityTimeVar = DateTime.Now;
             base.OnInitialized();
         }
     }

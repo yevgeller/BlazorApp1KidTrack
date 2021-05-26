@@ -1,10 +1,33 @@
 ﻿@page "/dailyActivityRecord/{StudentId:int}"
 
-<h3>DailyActivity</h3>
+<h3>New Activity Record for @student.Name</h3>
 
-Get student name
 
-Date
+<div class="form-group">
+    <label for="activityDate">Date:</label>
+    <button class="btn btn-secondary" type="button" @onclick="PrevDay" disabled="@TooFarInThePast()">
+        <i class="oi oi-media-skip-backward"></i>
+    </button>
+    <input type="text" @bind="GroupActivityDate" disabled id="activityDate" />
+    <button class="btn btn-secondary" type="button" @onclick="NextDay" disabled="@TooFarInTheFuture()">
+        <i class="oi oi-media-skip-forward"></i>
+    </button>
+    @if (TooFarInThePast() || TooFarInTheFuture())
+    {
+        <small id="classActivityHelp" class="form-text text-muted">Can only record for up to a week in the past or future.</small>
+    }
+</div>
+
+<div class="form-group">
+    <label for="activityTime">Time:</label>
+    <button class="btn btn-secondary" type="button" @onclick="FifteenMinPrior" disabled="@TooFarInThePast()">
+        <i class="oi oi-media-skip-backward"></i>
+    </button>
+    <input type="text" @bind="GroupActivityTime" disabled id="activityTime" />
+    <button class="btn btn-secondary" type="button" @onclick="FifteenMinFwd" disabled="@TooFarInTheFuture()">
+        <i class="oi oi-media-skip-forward"></i>
+    </button>
+</div>
 Time
 Adjust or Now
 

@@ -28,7 +28,7 @@
         @foreach (BlazorApp1.Shared.Models.Person p in thisRoom.Students)
         {
             <li>
-                @p.ForDisplay();
+                <a href="/dailyActivityRecord/@p.Id">@p.ForDisplay()</a>
             </li>
         }
     </ul>

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BlazorApp1.Client.Pages
 {
@@ -52,24 +51,21 @@ namespace BlazorApp1.Client.Pages
         {
             var dayOfWeek = groupActivityDateVar.DayOfWeek;
             int increment = -1;
-            if(dayOfWeek == DayOfWeek.Monday)
+            if (dayOfWeek == DayOfWeek.Monday)
             {
                 increment = -3;
             }
             groupActivityDateVar = groupActivityDateVar.AddDays(increment);
-            //if (DateTime.Now.AddDays(-7) < candidate)
-            //    groupActivityDateVar = candidate;
         }
 
         public void NextDay()
         {
             var dayOfWeek = groupActivityDateVar.DayOfWeek;
             int increment = 1;
-            if(dayOfWeek == DayOfWeek.Friday)
+            if (dayOfWeek == DayOfWeek.Friday)
             {
                 increment = 3;
             }
-
             groupActivityDateVar = groupActivityDateVar.AddDays(increment);
         }
 

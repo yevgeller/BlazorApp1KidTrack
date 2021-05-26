@@ -59,8 +59,7 @@ namespace BlazorApp1.FakeDAL2
 
         public Person GetPersonById(int id)
         {
-            throw new NotImplementedException();
-            //return persons.Where(x => x.Id == id).FirstOrDefault();
+            return persons.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public void EditPerson(PersonWithRoles newData)
