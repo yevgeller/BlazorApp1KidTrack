@@ -91,6 +91,15 @@ namespace BlazorApp1.Client.Pages
         {
             groupActivityTimeVar = groupActivityTimeVar.AddMinutes(15);
         }
+
+        public void SmallMinuteDecrement()
+        {
+            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(-3);
+        }
+        public void SmallMinuteIncrement()
+        {
+            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(3);
+        }
         protected override void OnParametersSet()
         {
             StudentId = StudentId;

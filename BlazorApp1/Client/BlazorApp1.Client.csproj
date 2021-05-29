@@ -6,6 +6,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-brands-400.eot" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-brands-400.svg" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-brands-400.ttf" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-brands-400.woff" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-brands-400.woff2" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-regular-400.eot" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-regular-400.svg" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-regular-400.ttf" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-regular-400.woff" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-regular-400.woff2" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-solid-900.eot" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-solid-900.svg" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-solid-900.ttf" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-solid-900.woff" />
+    <Content Remove="wwwroot\css\fa5\webfonts\fa-solid-900.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-brands-400.eot" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-brands-400.svg" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-brands-400.woff" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-brands-400.woff2" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-regular-400.eot" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-regular-400.svg" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-regular-400.woff" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-regular-400.woff2" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-solid-900.eot" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-solid-900.svg" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-solid-900.woff" />
+    <EmbeddedResource Include="wwwroot\css\fa5\webfonts\fa-solid-900.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
@@ -15,6 +51,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\BlazorApp1.FakeDAL2\BlazorApp1.FakeDAL2.csproj" />
     <ProjectReference Include="..\Shared\BlazorApp1.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\fa5\css\" />
   </ItemGroup>
 
 </Project>

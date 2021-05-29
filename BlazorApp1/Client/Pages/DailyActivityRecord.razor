@@ -5,7 +5,7 @@
 
 <div class="form-group">
     <label for="activityDate">Date:</label>
-    <button class="btn btn-secondary" type="button" @onclick="PrevDay" disabled="@TooFarInThePast()">
+    <button class="btn btn-secondary" type="button" @onclick="PrevDay" disabled="@TooFarInThePast()" style="margin-left:41px;">
         <i class="oi oi-media-skip-backward"></i>
     </button>
     <input type="text" @bind="GroupActivityDate" disabled id="activityDate" />
@@ -23,33 +23,63 @@
     <button class="btn btn-secondary" type="button" @onclick="FifteenMinPrior" disabled="@TooFarInThePast()">
         <i class="oi oi-media-skip-backward"></i>
     </button>
+    <button class="btn btn-secondary" type="button" @onclick="SmallMinuteDecrement" disabled="@TooFarInThePast()">
+        <i class="oi oi-caret-left"></i>
+    </button>
     <input type="text" @bind="GroupActivityTime" disabled id="activityTime" />
+    <button class="btn btn-secondary" type="button" @onclick="SmallMinuteIncrement" disabled="@TooFarInThePast()">
+        <i class="oi oi-caret-right"></i>
+    </button>
     <button class="btn btn-secondary" type="button" @onclick="FifteenMinFwd" disabled="@TooFarInTheFuture()">
         <i class="oi oi-media-skip-forward"></i>
     </button>
+    <button class="btn btn-dark">Now</button>
 </div>
-Time
-Adjust or Now
+<div class="flex">
+    <button class="btn btn-primary" type="button">
+        <i class="oi oi-trash"></i>Dirty diaper
+    </button>
+    <button class="btn btn-primary" type="button">
+        <i class="oi oi-rain"></i>Wet diaper
+    </button>
+    <button class="btn btn-primary" type="button">
+        <i class="oi oi-sun"></i>Clean diaper
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+<div class="flex">
+    <button class="btn btn-primary" type="button">Ate all breakfast</button>
+    <button class="btn btn-primary" type="button">Refused breakfast</button>
+    <button class="btn btn-primary" type="button">Ate very little breakfast</button>
+    <button class="btn btn-primary" type="button">Ate half of breakfast</button>
+</div>
+<div class="flex">
+    <button class="btn btn-primary" type="button">Ate all lunch</button>
+    <button class="btn btn-primary" type="button">Refused lunch</button>
+    <button class="btn btn-primary" type="button">Ate very little lunch</button>
+    <button class="btn btn-primary" type="button">Ate half of lunch</button>
+</div>
+<div class="flex">
+    <button class="btn btn-primary" type="button">Ate all snack</button>
+    <button class="btn btn-primary" type="button">Refused snack</button>
+    <button class="btn btn-primary" type="button">Ate very little snack</button>
+    <button class="btn btn-primary" type="button">Ate half of snack</button>
+</div>
+<div class="flex">
+    <button class="btn btn-primary" type="button">No nap</button>
+    <button class="btn btn-primary" type="button">Slept 30 min</button>
+    <button class="btn btn-primary" type="button">Slept 1 hour</button>
+    <button class="btn btn-primary" type="button">Slept 1.5 hours</button>
+    <button class="btn btn-primary" type="button">Slept well</button>
+</div>
+<div class="flex">
+    <button class="btn btn-primary" type="button">Need wipes</button>
+    <button class="btn btn-primary" type="button">Need diaper cream</button>
+    <button class="btn btn-primary" type="button">Need diapers</button>
+</div>
+<br />
+<br />
 
-Wet diaper
-Dirty diaper
-
-Ate half of breakfast
-Ate very little breakfast
-Refused breakfast
-
-Ate half of lunch
-Ate very little lunch
-Refused lunch
-
-
-Ate half of snack
-Ate very little snack
-Refused snack
-
-Need wipes
-Need diapers
-Need diaper cream
-
+Now
 Event coming up
 Message field
