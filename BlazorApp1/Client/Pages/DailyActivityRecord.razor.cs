@@ -2,6 +2,7 @@
 using BlazorApp1.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,18 +12,12 @@ namespace BlazorApp1.Client.Pages
     public partial class DailyActivityRecord
     {
         MainDAL mainDAL;
-
         Person student;
-        //List<StudentRoom> allStudentRooms;
-
-        //List<Room> rooms;
+        Hashtable selectedMessages;
+        Hashtable messageTypes;
 
         [Parameter]
         public int StudentId { get; set; }
-
-        //public int EditingThisId { get; set; }
-        //private int selectedRoom;
-        //public List<Room> allRooms;
 
         [Inject]
         NavigationManager nm { get; set; }
@@ -52,7 +47,6 @@ namespace BlazorApp1.Client.Pages
 
             return false;
         }
-
         public bool TooFarInThePast()
         {
             if (DateTime.Now.AddDays(-7) > groupActivityDateVar)
@@ -60,7 +54,6 @@ namespace BlazorApp1.Client.Pages
 
             return false;
         }
-
         public void PrevDay()
         {
             var dayOfWeek = groupActivityDateVar.DayOfWeek;
@@ -71,7 +64,6 @@ namespace BlazorApp1.Client.Pages
             }
             groupActivityDateVar = groupActivityDateVar.AddDays(increment);
         }
-
         public void NextDay()
         {
             var dayOfWeek = groupActivityDateVar.DayOfWeek;
@@ -82,23 +74,18 @@ namespace BlazorApp1.Client.Pages
             }
             groupActivityDateVar = groupActivityDateVar.AddDays(increment);
         }
-        public void FifteenMinPrior()
+        public void ChangeMinutes(int increment)
         {
-            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(-15);
+            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(increment);
         }
-
-        public void FifteenMinFwd()
+        private void SaveMessage(int messageCode)
         {
-            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(15);
+            string message = (string)messageTypes[messageCode];
+            selectedMessages.Add(messageCode, messageTypes[messageCode]);
         }
-
-        public void SmallMinuteDecrement()
+        private void RemoveMessage(int messageCode)
         {
-            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(-3);
-        }
-        public void SmallMinuteIncrement()
-        {
-            groupActivityTimeVar = groupActivityTimeVar.AddMinutes(3);
+            selectedMessages.Remove(messageCode);
         }
         protected override void OnParametersSet()
         {
@@ -111,7 +98,31 @@ namespace BlazorApp1.Client.Pages
             student = mainDAL.GetPersonById(StudentId);
             groupActivityDateVar = DateTime.Now;
             groupActivityTimeVar = DateTime.Now;
+            selectedMessages = new Hashtable();
+            GenerateHashTableOfMessages();
             base.OnInitialized();
         }
+
+        private void GenerateHashTableOfMessages()
+        {
+            messageTypes = new Hashtable();
+            messageTypes.Add(10, "Dirty Diaper");
+            messageTypes.Add(11, "Wet Diaper");
+            messageTypes.Add(12, "Clean Diaper");
+
+            messageTypes.Add(20, "Ate all breakfast");
+            messageTypes.Add(21, "Refused breakfast");
+            messageTypes.Add(22, "Ate very little breakfast");
+            messageTypes.Add(23, "Ate about half of breakfast");
+
+
+        }
     }
+
+    //public enum MessageCodes
+    //{
+    //    Dirty_Diaper = 10,
+    //    Wet_Diaper = 11,
+    //    Clean_Diaper = 12
+    //}
 }
