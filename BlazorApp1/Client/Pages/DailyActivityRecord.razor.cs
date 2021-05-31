@@ -78,14 +78,32 @@ namespace BlazorApp1.Client.Pages
         {
             groupActivityTimeVar = groupActivityTimeVar.AddMinutes(increment);
         }
-        private void SaveMessage(int messageCode)
+        private void AdjustMessage(int messageCode)
         {
-            string message = (string)messageTypes[messageCode];
-            selectedMessages.Add(messageCode, messageTypes[messageCode]);
+            if (selectedMessages.ContainsKey(messageCode))
+            {
+                selectedMessages.Remove(messageCode);
+            }
+            else
+            {
+                string message = (string)messageTypes[messageCode];
+                selectedMessages.Add(messageCode, messageTypes[messageCode]);
+            }
         }
-        private void RemoveMessage(int messageCode)
+
+        public string ProposedMessage
         {
-            selectedMessages.Remove(messageCode);
+            get
+            {
+                if (selectedMessages.Keys.Count == 0)
+                    return "N/A";
+                string result = "";
+                foreach (string s in selectedMessages.Values)
+                {
+                    result += s + "; ";
+                }
+                return result;
+            }
         }
         protected override void OnParametersSet()
         {
@@ -110,12 +128,27 @@ namespace BlazorApp1.Client.Pages
             messageTypes.Add(11, "Wet Diaper");
             messageTypes.Add(12, "Clean Diaper");
 
-            messageTypes.Add(20, "Ate all breakfast");
+            //messageTypes.Add(20, "Ate all breakfast");
             messageTypes.Add(21, "Refused breakfast");
             messageTypes.Add(22, "Ate very little breakfast");
             messageTypes.Add(23, "Ate about half of breakfast");
 
+            messageTypes.Add(31, "Refused lunch");
+            messageTypes.Add(32, "Ate very little lunch");
+            messageTypes.Add(33, "Ate about half of lunch");
 
+            messageTypes.Add(41, "Refused snack");
+            messageTypes.Add(42, "Ate very little snack");
+            messageTypes.Add(43, "Ate about half of snack");
+
+            messageTypes.Add(51, "No nap");
+            messageTypes.Add(52, "Slept 30 min");
+            messageTypes.Add(53, "Slept 1 hour");
+            messageTypes.Add(54, "Slept 1.5 hours");
+
+            messageTypes.Add(61, "Need wipes");
+            messageTypes.Add(62, "Need diaper cream");
+            messageTypes.Add(63, "Need diapers");
         }
     }
 
