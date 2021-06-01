@@ -33,7 +33,7 @@
     <button class="btn btn-secondary" type="button" @onclick="() => ChangeMinutes(15)" disabled="@TooFarInTheFuture()">
         <i class="oi oi-media-skip-forward"></i>
     </button>
-    <button class="btn btn-dark">Now</button>
+    <button class="btn btn-dark" @onclick="ResetDate">Now</button>
 </div>
 <div class="form-group">
     <h4>Proposed message:</h4>
@@ -86,17 +86,14 @@
     else
     {
         <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(21)'><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused breakfast</button>
-
     }
     @if (selectedMessages.ContainsKey(22))
     {
         <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(22)'><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little breakfast</button>
-
     }
     else
     {
         <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(22)'><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little breakfast</button>
-
     }
 
     @if (selectedMessages.ContainsKey(23))
@@ -110,25 +107,116 @@
 
 </div>
 <div class="flex">
-    <button class="btn btn-primary" type="button"><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused lunch</button>
-    <button class="btn btn-primary" type="button"><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little lunch</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-star-half-alt fa-2x"></i>&nbsp;Ate half of lunch</button>
+    @if (selectedMessages.ContainsKey(33))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(33)'><i class="fas fa-star-half-alt fa-2x"></i>&nbsp;Ate half of lunch</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(33)'><i class="fas fa-star-half-alt fa-2x"></i>&nbsp;Ate half of lunch</button>
+    }
+    @if (selectedMessages.ContainsKey(31))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(31)'><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused lunch</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(31)'><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused lunch</button>
+    }
+    @if (selectedMessages.ContainsKey(32))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(32)'><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little lunch</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(32)'><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little lunch</button>
+    }
 </div>
 <div class="flex">
-    <button class="btn btn-primary" type="button"><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused snack</button>
-    <button class="btn btn-primary" type="button"><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little snack</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-star-half-alt fa-2x"></i>&nbsp;Ate half of snack</button>
+    @if (selectedMessages.ContainsKey(41))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(41)'><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused snack</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(41)'><i class="far fa-thumbs-down fa-2x"></i>&nbsp;Refused snack</button>
+    }
+    @if (selectedMessages.ContainsKey(42))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(42)'><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little snack</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(42)'><i class="far fa-circle fa-2x"></i>&nbsp;Ate very little snack</button>
+    }
+    @if (selectedMessages.ContainsKey(43))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(43)'><i class="fas fa-star-half-alt fa-2x"></i>&nbsp;Ate half of snack</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(43)'><i class="fas fa-star-half-alt fa-2x"></i>&nbsp;Ate half of snack</button>
+    }
 </div>
 <div class="flex">
-    <button class="btn btn-primary" type="button"><i class="fas fa-battery-empty fa-2x"></i>&nbsp;No nap</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-battery-quarter fa-2x"></i>&nbsp;Slept 30 min</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-battery-half fa-2x"></i>&nbsp;Slept 1 hour</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-battery-three-quarters fa-2x"></i>&nbsp;Slept 1.5 hours</button>
+    @if (selectedMessages.ContainsKey(51))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(51)'><i class="fas fa-battery-empty fa-2x"></i>&nbsp;No nap</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(51)'><i class="fas fa-battery-empty fa-2x"></i>&nbsp;No nap</button>
+    }
+    @if (selectedMessages.ContainsKey(52))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(52)'><i class="fas fa-battery-quarter fa-2x"></i>&nbsp;Slept 30 min</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(52)'><i class="fas fa-battery-quarter fa-2x"></i>&nbsp;Slept 30 min</button>
+    }
+    @if (selectedMessages.ContainsKey(53))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(53)'><i class="fas fa-battery-half fa-2x"></i>&nbsp;Slept 1 hour</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(53)'><i class="fas fa-battery-half fa-2x"></i>&nbsp;Slept 1 hour</button>
+    }
+    @if (selectedMessages.ContainsKey(54))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(54)'><i class="fas fa-battery-three-quarters fa-2x"></i>&nbsp;Slept 1.5 hours</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(54)'><i class="fas fa-battery-three-quarters fa-2x"></i>&nbsp;Slept 1.5 hours</button>
+    }
 </div>
 <div class="flex">
-    <button class="btn btn-primary" type="button"><i class="fas fa-toilet-paper-slash fa-2x"></i>&nbsp;Need wipes</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-paint-brush fa-2x"></i>&nbsp;Need diaper cream</button>
-    <button class="btn btn-primary" type="button"><i class="fas fa-baby fa-2x"></i>&nbsp;Need diapers</button>
+    @if (selectedMessages.ContainsKey(61))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(61)'><i class="fas fa-toilet-paper-slash fa-2x"></i>&nbsp;Need wipes</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(61)'><i class="fas fa-toilet-paper-slash fa-2x"></i>&nbsp;Need wipes</button>
+    }
+    @if (selectedMessages.ContainsKey(62))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(62)'><i class="fas fa-paint-brush fa-2x"></i>&nbsp;Need diaper cream</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(62)'><i class="fas fa-paint-brush fa-2x"></i>&nbsp;Need diaper cream</button>
+    }
+    @if (selectedMessages.ContainsKey(63))
+    {
+        <button class="btn btn-warning" type="button" @onclick='() => AdjustMessage(63)'><i class="fas fa-baby fa-2x"></i>&nbsp;Need diapers</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" type="button" @onclick='() => AdjustMessage(63)'><i class="fas fa-baby fa-2x"></i>&nbsp;Need diapers</button>
+    }
 </div>
 <br />
 <br />

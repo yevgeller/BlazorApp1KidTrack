@@ -54,6 +54,12 @@ namespace BlazorApp1.Client.Pages
 
             return false;
         }
+        
+        public void ResetDate()
+        {
+            groupActivityDateVar = DateTime.Now;
+            groupActivityTimeVar = DateTime.Now;
+        }
         public void PrevDay()
         {
             var dayOfWeek = groupActivityDateVar.DayOfWeek;
