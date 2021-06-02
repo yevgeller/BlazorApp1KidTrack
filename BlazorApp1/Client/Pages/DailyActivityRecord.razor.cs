@@ -1,5 +1,6 @@
 ﻿using BlazorApp1.FakeDAL2;
 using BlazorApp1.Shared.Models;
+using BlazorApp1.Shared.Models.DailyActivityReport;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections;
@@ -13,7 +14,8 @@ namespace BlazorApp1.Client.Pages
     {
         MainDAL mainDAL;
         Person student;
-        Hashtable selectedMessages;
+        //Hashtable selectedMessages;
+        List<StatusMessage> selectedMessages;
         Hashtable messageTypes;
 
         [Parameter]
@@ -54,7 +56,7 @@ namespace BlazorApp1.Client.Pages
 
             return false;
         }
-        
+
         public void ResetDate()
         {
             groupActivityDateVar = DateTime.Now;
@@ -84,31 +86,57 @@ namespace BlazorApp1.Client.Pages
         {
             groupActivityTimeVar = groupActivityTimeVar.AddMinutes(increment);
         }
-        private void AdjustMessage(int messageCode)
+        private void AdjustMessage(int code)
         {
-            if (selectedMessages.ContainsKey(messageCode))
+            if (selectedMessages.Where(x => x.Code == code).Any())
             {
-                selectedMessages.Remove(messageCode);
+                selectedMessages.RemoveAll(x => x.Code == code);
             }
             else
-            {
-                string message = (string)messageTypes[messageCode];
-                selectedMessages.Add(messageCode, messageTypes[messageCode]);
+            { add type
+                    fix message
+                if (code >= 10 && code < 20)
+                {
+                    selectedMessages.RemoveAll(x => x.Code >= 10 && x.Code < 20);
+                }
+                else if (code >= 20 && code < 30)
+                {
+                    selectedMessages.RemoveAll(x => x.Code >= 20 && x.Code < 30);
+                }
+                else if (code >= 30 && code < 40)
+                {
+                    selectedMessages.RemoveAll(x => x.Code >= 30 && x.Code < 40);
+                }
+                else if (code >= 40 && code < 50)
+                {
+                    selectedMessages.RemoveAll(x => x.Code >= 40 && x.Code < 50);
+                }
+                SaveMessage(code);
             }
+        }
+        private void SaveMessage(int code)
+        {
+            selectedMessages.Add(new StatusMessage
+            {
+                Code = code,
+                Message = (string)messageTypes[code]
+            });
         }
 
         public string ProposedMessage
         {
             get
             {
-                if (selectedMessages.Keys.Count == 0)
+                if (selectedMessages.Count() == 0)
                     return "N/A";
-                string result = "";
-                foreach (string s in selectedMessages.Values)
-                {
-                    result += s + "; ";
-                }
-                return result;
+
+                return String.Join("; ", selectedMessages);
+                //string result = "";
+                //foreach (string s in selectedMessages.Values)
+                //{
+                //    result += s + "; ";
+                //}
+                //return result;
             }
         }
         protected override void OnParametersSet()
@@ -122,7 +150,7 @@ namespace BlazorApp1.Client.Pages
             student = mainDAL.GetPersonById(StudentId);
             groupActivityDateVar = DateTime.Now;
             groupActivityTimeVar = DateTime.Now;
-            selectedMessages = new Hashtable();
+            selectedMessages = new List<StatusMessage>(); //new Hashtable();
             GenerateHashTableOfMessages();
             base.OnInitialized();
         }
@@ -157,11 +185,4 @@ namespace BlazorApp1.Client.Pages
             messageTypes.Add(63, "Need diapers");
         }
     }
-
-    //public enum MessageCodes
-    //{
-    //    Dirty_Diaper = 10,
-    //    Wet_Diaper = 11,
-    //    Clean_Diaper = 12
-    //}
 }
