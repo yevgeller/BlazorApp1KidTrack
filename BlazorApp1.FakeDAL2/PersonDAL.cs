@@ -45,17 +45,17 @@ namespace BlazorApp1.FakeDAL2
             return pNew.Id;
         }
 
-        public List<Person> GetPeople()
-        {
-            throw new NotImplementedException();
-            //return persons;
-        }
+        //public List<Person> GetPeople()
+        //{
+        //    throw new NotImplementedException();
+        //    //return persons;
+        //}
 
-        public List<Person> GetPeopleByName(string name)
-        {
-            throw new NotImplementedException();
-            //return persons.Where(x => x.Name == name).ToList();
-        }
+        //public List<Person> GetPeopleByName(string name)
+        //{
+        //    throw new NotImplementedException();
+        //    //return persons.Where(x => x.Name == name).ToList();
+        //}
 
         public Person GetPersonById(int id)
         {

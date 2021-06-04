@@ -8,5 +8,6 @@ namespace BlazorApp1.Shared.Models.DailyActivityReport
     {
         public int Code { get; set; }
         public string Message { get; set; }
+        public string MessageType { get; set; }
     }
 }

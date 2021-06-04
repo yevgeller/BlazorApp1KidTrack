@@ -19,6 +19,9 @@ namespace BlazorApp1.Client.Pages
         Room newRoom;
         MainDAL mainDAL;
 
+
+        [Inject]
+        FakeDbContext ctx { get; set; }
         public string ErrorMessage { get; set; } = string.Empty;
         public bool NoErrors { get { return ErrorMessage == null || ErrorMessage.Length == 0; } }
 

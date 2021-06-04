@@ -93,8 +93,7 @@ namespace BlazorApp1.Client.Pages
                 selectedMessages.RemoveAll(x => x.Code == code);
             }
             else
-            { add type
-                    fix message
+            { 
                 if (code >= 10 && code < 20)
                 {
                     selectedMessages.RemoveAll(x => x.Code >= 10 && x.Code < 20);
@@ -110,6 +109,10 @@ namespace BlazorApp1.Client.Pages
                 else if (code >= 40 && code < 50)
                 {
                     selectedMessages.RemoveAll(x => x.Code >= 40 && x.Code < 50);
+                }
+                else if (code >= 50 && code < 60)
+                {
+                    selectedMessages.RemoveAll(x => x.Code >= 50 && x.Code < 60);
                 }
                 SaveMessage(code);
             }
@@ -130,13 +133,7 @@ namespace BlazorApp1.Client.Pages
                 if (selectedMessages.Count() == 0)
                     return "N/A";
 
-                return String.Join("; ", selectedMessages);
-                //string result = "";
-                //foreach (string s in selectedMessages.Values)
-                //{
-                //    result += s + "; ";
-                //}
-                //return result;
+                return String.Join("; ", selectedMessages.Select(x=>x.Message).ToList());
             }
         }
         protected override void OnParametersSet()
